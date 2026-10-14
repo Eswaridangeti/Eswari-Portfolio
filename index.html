@@ -1,0 +1,4442 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="editorial">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eswari Dangeti — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=VT323&family=Share+Tech+Mono&family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<style>
+:root{
+  --dur-fast:.18s; --dur-med:.4s; --dur-slow:.8s;
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{
+  scroll-behavior:smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  cursor: none !important;
+}
+body, a, button, input, textarea, select, [role="button"], nav, nav * {
+  cursor: none !important;
+}
+body{
+  min-height:100vh; overflow-x:hidden; cursor:none !important;
+  background:var(--bg); color:var(--ink);
+  font-family:var(--font-body); transition:background var(--dur-med) var(--ease), color var(--dur-med) var(--ease);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* ---------- COMPLETELY HIDE SCROLLBAR ACROSS ALL BROWSERS & DEVICES ---------- */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 0px !important;
+  height: 0px !important;
+  display: none !important;
+  background: transparent !important;
+}
+@media (hover:none){ body{cursor:auto;} }
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit;}
+::selection{background:var(--accent); color:var(--bg);}
+
+/* ---------- THEME TOKENS ---------- */
+html[data-theme="terminal"]{
+  --bg:#0a0d0a; --bg2:#0f140f; --ink:#c8ffd4; --ink-dim:#5a8a68;
+  --accent:#39ff6a; --accent2:#00c2ff; --card:#111811; --border:#25382a;
+  --font-display:'JetBrains Mono',monospace; --font-body:'JetBrains Mono',monospace;
+  --radius:2px;
+}
+html[data-theme="retro"]{
+  --bg:#160a1f; --bg2:#1f0f2b; --ink:#f5e6d3; --ink-dim:#a98fb0;
+  --accent:#ff2fa0; --accent2:#22e5ff; --card:#1f1029; --border:#3c2050;
+  --font-display:'VT323',monospace; --font-body:'Share Tech Mono',monospace;
+  --radius:0px;
+}
+html[data-theme="canvas"]{
+  --bg:#eef1f6; --bg2:#e2e7f0; --ink:#14213d; --ink-dim:#5c6a8c;
+  --accent:#ff6b35; --accent2:#2f4af5; --card:#ffffff; --border:#c9d2e3;
+  --font-display:'Syne',sans-serif; --font-body:'Plus Jakarta Sans',sans-serif;
+  --radius:14px;
+}
+html[data-theme="editorial"]{
+  --bg:#fbfaf7; --bg2:#f1efe9; --ink:#111111; --ink-dim:#6b6b6b;
+  --accent:#2f4af5; --accent2:#ffcc33; --card:#ffffff; --border:#dcdad2;
+  --font-display:'Playfair Display',serif; --font-body:'Space Grotesk',sans-serif;
+  --radius:0px;
+}
+html[data-theme="origami"]{
+  --bg:#f6f3ea; --bg2:#ebdccb; --ink:#2c3539; --ink-dim:#687780;
+  --accent:#e64a19; --accent2:#00897b; --card:#ffffff; --border:#d8cfc4;
+  --font-display:'Space Grotesk',sans-serif; --font-body:'Plus Jakarta Sans',sans-serif;
+  --radius:4px;
+}
+
+/* ---------- DARK MODE OVERRIDES ---------- */
+html[data-theme="canvas"][data-mode="dark"] {
+  --bg: #0d1117;
+  --bg2: #161b22;
+  --ink: #e6edf3;
+  --ink-dim: #8b949e;
+  --accent: #ff7b47;
+  --accent2: #388bfd;
+  --card: #161b22;
+  --border: #30363d;
+}
+html[data-theme="canvas"][data-mode="dark"] .grid-bg {
+  background-image: linear-gradient(#30363d 1px, transparent 1px), linear-gradient(90deg, #30363d 1px, transparent 1px);
+  opacity: 0.4;
+}
+
+html[data-theme="origami"][data-mode="dark"] {
+  --bg: #141619;
+  --bg2: #1e2024;
+  --ink: #f0f3f6;
+  --ink-dim: #9aa0a6;
+  --accent: #ff6b35;
+  --accent2: #26a69a;
+  --card: #1e2024;
+  --border: #32363d;
+}
+html[data-theme="origami"][data-mode="dark"] .origami-front {
+  background: linear-gradient(135deg, #282b30 52%, #1e2024 52%);
+  color: var(--ink);
+}
+html[data-theme="origami"][data-mode="dark"] .origami-inside {
+  background: #1e2024;
+  border-color: var(--accent);
+  background-image: radial-gradient(color-mix(in srgb, var(--accent) 15%, transparent) 1.5px, transparent 1.5px);
+}
+html[data-theme="origami"][data-mode="dark"] .grid-bg {
+  background-image: 
+    linear-gradient(45deg, rgba(255,107,53,0.06) 25%, transparent 25%), 
+    linear-gradient(-45deg, rgba(38,166,154,0.06) 25%, transparent 25%),
+    linear-gradient(135deg, rgba(255,107,53,0.06) 25%, transparent 25%),
+    linear-gradient(-135deg, rgba(38,166,154,0.06) 25%, transparent 25%);
+  opacity: 0.9;
+}
+
+html[data-theme="editorial"][data-mode="dark"] {
+  --bg: #121212;
+  --bg2: #1a1a1a;
+  --ink: #f5f5f5;
+  --ink-dim: #999999;
+  --accent: #4d6bff;
+  --accent2: #ffd54f;
+  --card: #1a1a1a;
+  --border: #2e2e2e;
+}
+
+h1,h2,h3{font-family:var(--font-display); line-height:1.2; letter-spacing:-.01em;}
+h2{font-size:clamp(2.2rem, 4.5vw, 3.4rem); margin-top:8px; margin-bottom:36px;}
+.eyebrow{display:none !important;}
+
+/* ---------- LAYOUT SHELL ---------- */
+.wrap{max-width:1240px; margin:0 auto; padding-left:7vw; padding-right:7vw;}
+section{padding:clamp(150px, 20vh, 220px) 0; position:relative;}
+.grid-bg{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.5; transition:opacity var(--dur-med);}
+html[data-theme="canvas"] .grid-bg{
+  background-image:linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:44px 44px; opacity:.55;
+}
+html[data-theme="terminal"] .grid-bg{background:repeating-linear-gradient(180deg, rgba(57,255,106,.035) 0 1px, transparent 1px 3px);}
+html[data-theme="retro"] .grid-bg{background:repeating-linear-gradient(180deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px); mix-blend-mode:overlay;}
+html[data-theme="editorial"] .grid-bg{opacity:0;}
+html[data-theme="origami"] .grid-bg{
+  background-image: 
+    linear-gradient(45deg, rgba(230,74,25,0.03) 25%, transparent 25%), 
+    linear-gradient(-45deg, rgba(0,137,123,0.03) 25%, transparent 25%),
+    linear-gradient(135deg, rgba(230,74,25,0.03) 25%, transparent 25%),
+    linear-gradient(-135deg, rgba(0,137,123,0.03) 25%, transparent 25%);
+  background-size: 60px 60px;
+  opacity: 0.8;
+}
+
+/* ---------- CUSTOM CURSOR ---------- */
+#cursor-dot,#cursor-ring{
+  position:fixed; top:0; left:0; pointer-events:none; z-index:99999;
+  transform:translate(-50%,-50%);
+  transition:width var(--dur-fast) var(--ease), height var(--dur-fast) var(--ease), border-color var(--dur-fast), background var(--dur-fast), opacity var(--dur-fast) var(--ease), border-radius var(--dur-fast) var(--ease), transform 0.08s ease;
+}
+#cursor-dot{width:6px; height:6px; background:var(--accent); border-radius:50%;}
+#cursor-ring{width:32px; height:32px; border:1.5px solid var(--accent); border-radius:50%; background:transparent;}
+#cursor-ring.hover{width:56px; height:56px; background:color-mix(in srgb, var(--accent) 15%, transparent);}
+#cursor-dot.hidden, #cursor-ring.hidden{opacity:0 !important;}
+
+/* Theme 1: Terminal - Square Pixel Block Terminal Cursor with scan-glow */
+html[data-theme="terminal"] #cursor-dot {
+  width: 9px; height: 9px;
+  border-radius: 0px;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+html[data-theme="terminal"] #cursor-ring {
+  border-radius: 2px;
+  border: 1.5px solid var(--accent);
+  box-shadow: 0 0 12px rgba(57, 255, 106, 0.35);
+}
+html[data-theme="terminal"] #cursor-ring.hover {
+  border-radius: 2px;
+  background: rgba(57, 255, 106, 0.15);
+}
+
+/* Theme 2: Retro CRT - Pixelated Crosshair / Target Cursor */
+html[data-theme="retro"] #cursor-dot {
+  width: 5px; height: 5px;
+  border-radius: 0;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent), 0 0 14px var(--accent2);
+}
+html[data-theme="retro"] #cursor-ring {
+  width: 36px; height: 36px;
+  border-radius: 0;
+  border: 2px dashed var(--accent);
+  box-shadow: inset 0 0 8px rgba(255, 47, 160, 0.3), 0 0 10px rgba(34, 229, 255, 0.4);
+  animation: retro-cursor-spin 6s linear infinite;
+}
+html[data-theme="retro"] #cursor-ring.hover {
+  border: 2px solid var(--accent2);
+  width: 54px; height: 54px;
+  background: rgba(255, 47, 160, 0.2);
+}
+@keyframes retro-cursor-spin {
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Theme 3: Infinite Canvas - Precision Celestial Ring / Orbit Target */
+html[data-theme="canvas"] #cursor-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+html[data-theme="canvas"] #cursor-ring {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  animation: canvas-orbit 3s linear infinite;
+}
+html[data-theme="canvas"] #cursor-ring.hover {
+  width: 56px; height: 56px;
+  border: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+@keyframes canvas-orbit {
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Theme 4: Editorial - Elegant Calligraphic Diamond / Quill Mark */
+html[data-theme="editorial"] #cursor-dot {
+  width: 8px; height: 8px;
+  border-radius: 1px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: var(--accent);
+}
+html[data-theme="editorial"] #cursor-ring {
+  width: 28px; height: 28px;
+  border-radius: 2px;
+  border: 1.5px solid var(--accent);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+html[data-theme="editorial"] #cursor-ring.hover {
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+/* Theme 5: Origami - Geometric Folded Polyhedron Cursor */
+html[data-theme="origami"] #cursor-dot {
+  width: 8px; height: 8px;
+  border-radius: 0;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  background: var(--accent);
+}
+html[data-theme="origami"] #cursor-ring {
+  width: 32px; height: 32px;
+  border-radius: 4px;
+  border: 1.5px solid var(--accent);
+  transform: translate(-50%, -50%) rotate(15deg);
+}
+html[data-theme="origami"] #cursor-ring.hover {
+  width: 54px; height: 54px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+#cursor-trail-canvas{
+  position:fixed; inset:0; pointer-events:none; z-index:99998; width:100vw; height:100vh;
+}
+@media (hover:none){ #cursor-dot,#cursor-ring,#cursor-trail-canvas{display:none;} }
+
+/* ---------- THEME SWITCHER ---------- */
+#theme-switcher{
+  position:fixed; top:20px; right:20px; z-index:1000; display:flex; gap:6px;
+  background:var(--card); border:1px solid var(--border); border-radius:999px; padding:6px;
+}
+#theme-switcher button{
+  width:38px; height:38px; border-radius:50%; font-size:.65rem; font-weight:700;
+  display:flex; align-items:center; justify-content:center; color:var(--ink-dim);
+  transition:all var(--dur-fast) var(--ease); border:1px solid transparent;
+}
+#theme-switcher button.active{background:var(--accent); color:var(--bg); border-color:var(--accent);}
+#theme-switcher button:hover{color:var(--ink);}
+
+/* ---------- AUDIO DOCK WIDGET ---------- */
+.audio-dock {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px 6px 6px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  transition: all 0.25s var(--ease);
+}
+.audio-dock button#mute-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+.audio-dock button#mute-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+.volume-popover {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.volume-popover input[type="range"] {
+  accent-color: var(--accent);
+  width: 80px;
+  height: 4px;
+  cursor: pointer;
+}
+#volume-val {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-dim);
+  min-width: 32px;
+}
+
+/* ---------- BOTTOM-LEFT CONFETTI TRIGGER BUTTON ---------- */
+.confetti-btn {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 950;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--card) 85%, transparent);
+  backdrop-filter: blur(12px);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transition: all 0.25s var(--ease);
+}
+.confetti-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+.confetti-btn.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 0 16px var(--accent);
+}
+html[data-theme="canvas"] .confetti-btn { display: none; }
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:900;
+  padding:24px 7vw; display:flex; justify-content:space-between; align-items:center;
+  backdrop-filter:blur(14px); background:color-mix(in srgb, var(--bg) 80%, transparent);
+  transition:transform 0.38s cubic-bezier(.22,1,.36,1), background 0.35s;
+}
+nav.nav-hidden{ transform:translateY(-100%); }
+nav .logo{font-family:var(--font-display); font-weight:700; font-size:1.15rem;}
+nav ul{list-style:none; display:flex; gap:36px; font-size:.9rem; position:absolute; left:50%; transform:translateX(-50%);}
+nav ul a{position:relative; padding-bottom:2px;}
+nav ul a::after{content:'';position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--accent); transition:width var(--dur-fast) var(--ease);}
+nav ul a:hover::after{width:100%;}
+@media(max-width:720px){ nav ul{display:none;} }
+
+/* ---------- HERO ---------- */
+#hero{
+  min-height:92svh; display:flex; flex-direction:column; justify-content:center;
+  padding-top:170px; padding-bottom:100px; position:relative;
+}
+
+/* ---------- TYPEWRITER ANIMATION & HERO STYLING ---------- */
+.hero-title {
+  font-size: clamp(2.6rem, 7vw, 5.4rem);
+  margin: 0.2em 0 0.4em;
+  line-height: 1.15;
+}
+.typewriter-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+#hero-typewriter {
+  color: var(--accent);
+  transition: color 0.3s ease;
+}
+.typewriter-cursor {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 400;
+  animation: cursor-blink 0.8s infinite;
+  margin-left: 2px;
+}
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+html[data-theme="retro"] #hero-typewriter {
+  color: var(--accent2);
+}
+.btn{
+  display:inline-flex; align-items:center; gap:8px; padding:16px 30px; border:1.5px solid var(--ink);
+  border-radius:var(--radius); font-size:.88rem; font-weight:600; letter-spacing:.02em;
+  transition:all var(--dur-fast) var(--ease);
+}
+.btn:hover{background:var(--accent); border-color:var(--accent); color:var(--bg); transform:translateY(-2px);}
+.btn-row{display:flex; gap:18px; flex-wrap:wrap; margin-top:.8em;}
+.scroll-cue{position:relative; margin-top:54px; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-dim); display:flex; align-items:center; gap:10px;}
+.scroll-cue .line{width:28px; height:1px; background:var(--ink-dim); animation:pulse-line 2s infinite;}
+@keyframes pulse-line{50%{width:12px;}}
+
+/* terminal blinking cursor accent */
+html[data-theme="terminal"] #hero h1::after{content:'▌'; color:var(--accent); animation:blink 1s steps(1) infinite; font-size:.6em; vertical-align:middle;}
+@keyframes blink{50%{opacity:0;}}
+
+/* retro glitch */
+html[data-theme="retro"] .glitch:hover{animation:glitch .25s steps(2) infinite;}
+@keyframes glitch{
+  0%{text-shadow:2px 0 var(--accent2), -2px 0 var(--accent);}
+  100%{text-shadow:-2px 0 var(--accent2), 2px 0 var(--accent);}
+}
+html[data-theme="retro"] body::before{
+  content:''; position:fixed; inset:0; z-index:9997; pointer-events:none;
+  background:repeating-linear-gradient(180deg, rgba(0,0,0,.18) 0 2px, transparent 2px 4px);
+}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0; transform:translateY(28px); transition:opacity .7s var(--ease), transform .7s var(--ease);}
+.reveal.in{opacity:1; transform:translateY(0);}
+
+/* ---------- ABOUT ---------- */
+#about .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:110px; align-items:start; margin-top:2.5em;}
+#about p{color:var(--ink-dim); font-size:1.08rem; line-height:1.85; margin-top:1.2em;}
+.tag-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:2em;}
+.tag{border:1px solid var(--border); border-radius:999px; padding:8px 18px; font-size:.82rem; color:var(--ink-dim);}
+
+/* ---------- SKILLS (matter.js canvas) ---------- */
+.skills-header{display:flex; justify-content:space-between; align-items:center; margin-top:1.5em; margin-bottom:1.2em; flex-wrap:wrap; gap:14px;}
+.skills-hint{font-size:.85rem; color:var(--ink-dim); letter-spacing:.04em;}
+.reset-btn{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 18px; border:1px solid var(--border); border-radius:var(--radius);
+  background:var(--card); color:var(--ink); font-family:var(--font-body);
+  font-size:.8rem; font-weight:600; cursor:pointer;
+  transition:all var(--dur-fast) var(--ease);
+}
+.reset-btn:hover{
+  border-color:var(--accent); color:var(--bg); background:var(--accent); transform:translateY(-2px);
+}
+#skills-canvas-wrap{width:100%; height:480px; border:1px solid var(--border); border-radius:var(--radius); background:var(--card); overflow:hidden; position:relative; margin-top:.5em;}
+#skills-canvas-wrap canvas{display:block;}
+
+/* ---------- JOURNEY ---------- */
+.timeline{border-left:1.5px solid var(--border); padding-left:40px; display:flex; flex-direction:column; gap:64px; margin-top:2.8em;}
+.t-item{position:relative;}
+.t-item::before{content:''; position:absolute; left:-46px; top:5px; width:13px; height:13px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);}
+.t-item h3{font-size:1.2rem; margin-bottom:.4em;}
+.t-item span.date{font-size:.78rem; color:var(--accent); text-transform:uppercase; letter-spacing:.1em;}
+.t-item p{color:var(--ink-dim); margin-top:.6em; font-size:1rem; line-height:1.68; max-width:580px;}
+
+/* ---------- PROJECTS ---------- */
+.proj-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:48px; margin-top:2.8em;}
+.proj-card{
+  border:1px solid var(--border); border-radius:var(--radius); padding:38px; background:var(--card);
+  position:relative; overflow:hidden; transition:transform var(--dur-med) var(--ease), border-color var(--dur-fast);
+}
+.proj-card:hover{transform:translateY(-6px); border-color:var(--accent);}
+.proj-card .num{font-family:var(--font-display); font-size:.78rem; color:var(--accent); letter-spacing:.1em;}
+.proj-card h3{font-size:1.45rem; margin:.6em 0 .6em;}
+.proj-card p{color:var(--ink-dim); font-size:.96rem; line-height:1.68; margin-bottom:1.6em;}
+.proj-links{display:flex; gap:16px; font-size:.88rem;}
+.proj-links a{border-bottom:1px solid var(--ink-dim); padding-bottom:3px; transition:border-color var(--dur-fast), color var(--dur-fast);}
+.proj-links a:hover{border-color:var(--accent); color:var(--accent);}
+.proj-card::after{
+  content:''; position:absolute; inset:0; opacity:0; background:linear-gradient(135deg, transparent 40%, color-mix(in srgb, var(--accent) 12%, transparent) 100%);
+  transition:opacity var(--dur-med); pointer-events:none;
+}
+.proj-card:hover::after{opacity:1;}
+
+/* ---------- CONTACT ---------- */
+#contact .c-wrap{display:grid; grid-template-columns:1fr 1fr; gap:110px; margin-top:2.8em;}
+.field{margin-bottom:26px;}
+.field label{display:block; font-size:.75rem; text-transform:uppercase; letter-spacing:.12em; color:var(--ink-dim); margin-bottom:8px;}
+.field input, .field textarea{
+  width:100%; background:transparent; border:none; border-bottom:1.5px solid var(--border); color:var(--ink);
+  padding:12px 4px; font-family:var(--font-body); font-size:1.05rem; outline:none; transition:border-color var(--dur-fast);
+}
+.field input:focus, .field textarea:focus{border-color:var(--accent);}
+.contact-links{display:flex; flex-direction:column; gap:18px; margin-top:1.8em;}
+.contact-links a{font-size:1rem; display:flex; gap:12px; align-items:center;}
+footer{padding:60px 7vw; border-top:1px solid var(--border); display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; font-size:.85rem; color:var(--ink-dim);}
+
+@media(max-width:820px){
+  #about .about-grid, #contact .c-wrap{grid-template-columns:1fr; gap:40px;}
+  .wrap{padding-left:5vw; padding-right:5vw;}
+  section{padding:clamp(80px, 12vh, 140px) 0;}
+  #hero{padding-top:120px; padding-bottom:60px;}
+  .proj-grid{grid-template-columns:1fr; gap:24px;}
+  #view-resume-floating-btn{bottom:74px; right:16px; padding:8px 14px; font-size:0.78rem;}
+  #dev-terminal-dock-btn{bottom:20px; right:16px; padding:8px 14px; font-size:0.78rem;}
+  #scroll-to-top-btn{bottom:128px; right:16px;}
+  #theme-switcher{top:12px; right:12px; padding:4px;}
+  #theme-switcher button{width:32px; height:32px; font-size:0.6rem;}
+  nav{padding:16px 5vw;}
+}
+@media(max-width:600px){
+  .wrap{padding-left:4vw; padding-right:4vw;}
+  .terminal-game-bar{flex-direction:column; align-items:flex-start; gap:8px;}
+  .terminal-game-box{padding:16px;}
+  .editorial-hud{flex-direction:column; align-items:flex-start; gap:12px;}
+  .ed-stats{flex-wrap:wrap;}
+  .resume-section-body{padding-left:0 !important;}
+  .timeline{border-left:none; padding-left:0;}
+  .timeline-item{padding-left:0;}
+  .timeline-marker{display:none;}
+}
+@media(hover:none),(pointer:coarse){
+  body, a, button, input, textarea, select, [role="button"], nav, nav * {
+    cursor: auto !important;
+  }
+  #cursor-dot, #cursor-ring, #cursor-trail-canvas {
+    display: none !important;
+  }
+}
+
+/* ---------- INFINITE SPATIAL CANVAS MODE ---------- */
+html[data-theme="canvas"] body {
+  overflow: hidden !important;
+  height: 100vh;
+  width: 100vw;
+  cursor: grab;
+}
+html[data-theme="canvas"] body:active {
+  cursor: grabbing;
+}
+html[data-theme="canvas"] #canvas-world {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+html[data-theme="canvas"] section.wrap {
+  position: absolute !important;
+  margin: 0 !important;
+  padding: 40px !important;
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0,0,0,0.03);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  user-select: text;
+  box-sizing: border-box;
+}
+html[data-theme="canvas"] section.wrap:hover {
+  border-color: var(--accent) !important;
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--accent) 18%, transparent), 0 0 0 2px var(--accent);
+}
+
+/* ---------- MULTI-THEME MINI-GAME HUB STYLING ---------- */
+.theme-game-container {
+  display: none;
+  margin-top: 24px;
+  width: 100%;
+}
+
+/* 1. Terminal Typing Race ("Hack the Stack") */
+html[data-theme="terminal"] #terminal-game-wrap { display: block; }
+.terminal-game-box {
+  background: #090c09;
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: 0 0 20px rgba(57, 255, 106, 0.15);
+  font-family: var(--font-body);
+}
+.terminal-game-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed rgba(57, 255, 106, 0.3);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+.terminal-command-wrap {
+  text-align: center;
+  margin: 20px 0;
+}
+.term-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--ink-dim);
+  display: block;
+  margin-bottom: 8px;
+}
+.term-cmd-text {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  background: rgba(57, 255, 106, 0.1);
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: inline-block;
+  border: 1px solid var(--accent);
+}
+.terminal-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0,0,0,0.4);
+  padding: 12px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.term-prompt {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+#term-input {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 600;
+  outline: none;
+  width: 100%;
+}
+.terminal-timer-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+#term-timer-progress {
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.1s linear;
+}
+
+/* 2. Retro CRT Breakout Arcade */
+html[data-theme="retro"] #retro-game-wrap { display: block; }
+.retro-game-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--accent2);
+}
+#retro-breakout-canvas {
+  width: 100%;
+  max-width: 680px;
+  height: 380px;
+  background: #0d0614;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  box-shadow: 0 0 24px rgba(255, 47, 160, 0.25);
+  display: block;
+  margin: 0 auto;
+}
+
+/* 3. Infinite Canvas Constellation Map */
+html[data-theme="canvas"] #canvas-game-wrap { display: block; }
+.constellation-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-dim);
+}
+.constellation-board {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  background: color-mix(in srgb, var(--card) 90%, transparent);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+#constellation-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.c-node {
+  position: absolute;
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.c-node:hover, .c-node.selected {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: scale(1.08);
+  box-shadow: 0 0 16px var(--accent);
+}
+
+/* 4. Editorial Manuscript Proofreading Game */
+html[data-theme="editorial"] #editorial-game-wrap { display: block; }
+.editorial-manuscript-card {
+  background: #fdfbf7;
+  color: #1c1917;
+  border: 1.5px solid #d8cfc4;
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08), inset 0 0 40px rgba(216, 207, 196, 0.2);
+  font-family: var(--font-display);
+  line-height: 1.95;
+  position: relative;
+}
+.manuscript-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1.5px solid #d8cfc4;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #78716c;
+}
+.red-pen-mark {
+  color: #dc2626;
+  font-weight: 700;
+}
+.manuscript-text {
+  font-size: 1.25rem;
+  color: #292524;
+}
+.manuscript-word {
+  display: inline-block;
+  margin: 0 2px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.manuscript-word:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+.manuscript-word.corrected {
+  text-decoration: line-through;
+  color: #dc2626;
+  font-weight: 700;
+  background: rgba(220, 38, 38, 0.08);
+}
+.manuscript-word.corrected::after {
+  content: ' ✓';
+  color: #16a34a;
+  font-weight: 900;
+}
+.ed-slot.filled {
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--card);
+  color: var(--ink);
+  font-weight: 700;
+}
+.editorial-fragments-pool {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ed-fragment {
+  padding: 10px 18px;
+  background: #fdfbf7;
+  color: #1a1a1a;
+  border: 1px solid #d8cfc4;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: grab;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+  transform: rotate(-1.5deg);
+  transition: all 0.2s ease;
+}
+.ed-fragment:hover {
+  transform: rotate(1deg) scale(1.05);
+  border-color: var(--accent);
+  box-shadow: 5px 5px 0 var(--accent);
+}
+
+/* ===================== FEATURE 1: DEV TERMINAL CONSOLE WIDGET ===================== */
+#dev-terminal-dock-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  background: var(--card);
+  color: var(--ink);
+  border: 1.5px solid var(--border);
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+#dev-terminal-dock-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: #39ff6a;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #39ff6a;
+  animation: pulseGlow 1.5s infinite alternate;
+}
+@keyframes pulseGlow {
+  0% { opacity: 0.4; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Console Overlay background */
+#dev-console-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+#dev-console-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Console Window Panel */
+#dev-console-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: min(650px, calc(100vw - 32px));
+  height: 460px;
+  z-index: 1000;
+  background: rgba(13, 16, 21, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #f0f6fc;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: 'JetBrains Mono', monospace;
+}
+#dev-console-window.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.console-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  user-select: none;
+}
+.console-controls {
+  display: flex;
+  align-items: center;
+}
+.console-prompt-sym {
+  color: #39ff6a;
+  margin-right: 8px;
+  font-weight: 700;
+}
+.console-title-text {
+  color: #ffffff;
+  letter-spacing: 0.05em;
+}
+
+.console-close-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+.console-close-btn:hover {
+  color: #39ff6a;
+}
+
+/* Console Output & Input */
+.console-output-area {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  color: #c9d1d9;
+}
+.console-line {
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+.console-line.sys {
+  font-style: italic;
+  color: #00e5ff;
+}
+.console-line.cmd-prompt {
+  font-weight: 700;
+  color: #39ff6a;
+}
+.console-line.ans {
+  color: #f0f6fc;
+}
+.console-line.err {
+  color: #ff6b6b;
+}
+
+.console-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: rgba(0, 0, 0, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.console-prompt-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #39ff6a;
+  white-space: nowrap;
+}
+#dev-console-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  font-weight: 600;
+  outline: none;
+}
+
+/* ---------- VIEW RESUME FLOATING BUTTON ---------- */
+#view-resume-floating-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  z-index: 999;
+  background: var(--card);
+  color: var(--ink);
+  border: 1.5px solid var(--border);
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+#view-resume-floating-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+/* ---------- INTERACTIVE RESUME MODAL ---------- */
+#interactive-resume-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1010;
+  background: rgba(10, 11, 14, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+#interactive-resume-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Modal Header Bar */
+.resume-modal-header {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 0;
+  background: rgba(10, 11, 14, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+.resume-header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.resume-header-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+.resume-header-btn:hover {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #ffffff;
+}
+.resume-header-btn.back-btn {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.resume-modal-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+  padding: 0 8px;
+}
+.resume-modal-close:hover {
+  color: #ff3b30;
+}
+
+/* Modal Content Scroll Area */
+.resume-modal-content {
+  flex: 1;
+  padding: 40px 20px 80px;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+}
+
+/* Resume Paper / Body */
+.resume-paper {
+  max-width: 840px;
+  width: 100%;
+  background: #0f1216;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 48px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  color: #e2e8f0;
+  font-family: var(--font-body);
+}
+
+/* Resume Title Section */
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.resume-title-group h1 {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+.resume-subtitle {
+  color: #39ff6a;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
+}
+.resume-contact-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: #94a3b8;
+}
+.resume-contact-info a {
+  color: #94a3b8;
+  text-decoration: none;
+}
+.resume-contact-info a:hover {
+  color: #39ff6a;
+}
+
+/* Resume Sections */
+.resume-section {
+  margin-bottom: 36px;
+}
+.resume-section-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+.resume-section-body {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #cbd5e1;
+}
+
+/* Education Layout */
+.edu-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+.edu-school {
+  color: #39ff6a;
+  font-size: 0.9rem;
+}
+
+/* Skills Category Card Grid */
+.skills-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+.skills-category-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+.skills-category-card:hover {
+  border-color: rgba(57, 255, 106, 0.3);
+  background: rgba(255, 255, 255, 0.03);
+}
+.skills-category-card h3 {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #ffffff;
+  margin-bottom: 12px;
+  border-left: 3px solid #39ff6a;
+  padding-left: 8px;
+}
+.skills-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.skills-tag-list span {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  transition: all 0.2s ease;
+}
+.skills-tag-list span:hover {
+  background: rgba(57, 255, 106, 0.15);
+  border-color: #39ff6a;
+  color: #ffffff;
+}
+
+/* Project Items */
+.resume-project-item {
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 20px;
+}
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.project-name {
+  color: #ffffff;
+}
+.project-link a {
+  color: #39ff6a;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+.project-link a:hover {
+  text-decoration: underline;
+}
+.project-desc {
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+/* Community List */
+.community-list {
+  padding-left: 20px;
+}
+.community-list li {
+  margin-bottom: 8px;
+}
+
+/* Print Styles */
+@media print {
+  body > *:not(#interactive-resume-modal) {
+    display: none !important;
+  }
+  #interactive-resume-modal {
+    position: relative !important;
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    overflow: visible !important;
+  }
+  .resume-modal-header {
+    display: none !important;
+  }
+  .resume-modal-content {
+    padding: 0 !important;
+  }
+  .resume-paper {
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .resume-title-group h1 {
+    color: #111111 !important;
+  }
+  .resume-subtitle {
+    color: #0284c7 !important;
+  }
+  .resume-contact-info {
+    color: #475569 !important;
+  }
+  .resume-contact-info a {
+    color: #475569 !important;
+  }
+  .resume-section-title {
+    color: #111111 !important;
+    border-bottom-color: #cbd5e1 !important;
+  }
+  .resume-section-body {
+    color: #334155 !important;
+  }
+  .edu-header, .edu-school, .project-name {
+    color: #111111 !important;
+  }
+  .project-desc {
+    color: #475569 !important;
+  }
+  .skills-category-card {
+    background: none !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+  .skills-category-card h3 {
+    color: #111111 !important;
+    border-left-color: #0284c7 !important;
+  }
+  .skills-tag-list span {
+    background: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #334155 !important;
+  }
+}
+
+/* ---------- SCROLL TO TOP BUTTON ---------- */
+#scroll-to-top-btn {
+  position: fixed;
+  bottom: 136px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  z-index: 999;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background var(--dur-med), border-color var(--dur-med);
+  transform: translateY(10px) scale(0.9);
+}
+#scroll-to-top-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+#scroll-to-top-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-3px) scale(1.05);
+}
+#scroll-to-top-btn .arrow {
+  font-size: 1.2rem;
+  font-weight: 700;
+  position: absolute;
+}
+#scroll-to-top-btn svg.progress-ring {
+  transform: rotate(-90deg);
+}
+#scroll-to-top-btn .progress-ring__circle {
+  stroke-dasharray: 113.1;
+  stroke-dashoffset: 113.1;
+  transition: stroke-dashoffset 0.1s;
+}
+
+/* ---------- LOADER SCREEN ---------- */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #0a0c10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+  font-family: 'JetBrains Mono', monospace;
+  color: #ffffff;
+}
+.loader-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.loader-diamond {
+  width: 90px;
+  height: 90px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(45deg);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+.diamond-ring {
+  position: absolute;
+  inset: -6px;
+  border: 2px solid transparent;
+  border-top-color: var(--accent);
+  border-bottom-color: var(--accent);
+  border-radius: 16px;
+  animation: spin 2s linear infinite;
+  box-shadow: 0 0 10px var(--accent);
+}
+.diamond-text {
+  font-size: 1.8rem;
+  font-weight: 700;
+  transform: rotate(-45deg);
+  color: #ffffff;
+  letter-spacing: -0.05em;
+}
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+.loader-percentage {
+  font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+.loader-progress-bar {
+  width: 280px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.loader-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  transition: width 0.1s linear;
+}
+.loader-status {
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: #8b949e;
+  text-transform: uppercase;
+}
+
+/* Hide old default sandbox in non-default themes */
+html[data-theme="canvas"] .skills-header,
+html[data-theme="canvas"] #skills-canvas-wrap,
+html[data-theme="origami"] .skills-header,
+html[data-theme="origami"] #skills-canvas-wrap,
+html[data-theme="terminal"] .skills-header,
+html[data-theme="terminal"] #skills-canvas-wrap,
+html[data-theme="retro"] .skills-header,
+html[data-theme="retro"] #skills-canvas-wrap,
+html[data-theme="editorial"] .skills-header,
+html[data-theme="editorial"] #skills-canvas-wrap {
+  display: none !important;
+}
+
+/* ---------- 3D ORIGAMI SKILLS EXPERIENCE ---------- */
+html[data-theme="origami"] #origami-game-wrap { display: block; }
+.origami-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-top: 2em;
+  perspective: 1200px;
+}
+html[data-theme="origami"] .origami-skills-grid {
+  display: grid;
+}
+
+.origami-card {
+  height: 160px;
+  perspective: 1000px;
+  cursor: pointer;
+  user-select: none;
+}
+.origami-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.origami-card:hover .origami-wrapper {
+  transform: translateY(-6px) rotateX(6deg) rotateY(-6deg);
+}
+
+.origami-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border: 1px dashed var(--border);
+  box-shadow: 4px 8px 20px rgba(0,0,0,0.06);
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+}
+
+/* Front Folded State */
+.origami-front {
+  background: linear-gradient(135deg, #ffffff 52%, #f5efe2 52%);
+  color: var(--ink);
+  transform: rotateY(0deg);
+  overflow: hidden;
+}
+.origami-front::after {
+  content: '📐 TAP TO UNFOLD';
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-top: 12px;
+}
+.origami-front .origami-icon {
+  font-size: 2.2rem;
+  transition: transform 0.4s ease;
+}
+.origami-card:hover .origami-front .origami-icon {
+  transform: scale(1.15) rotate(8deg);
+}
+
+/* Triangle Paper Corner Fold */
+.origami-front::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 36px 36px 0;
+  border-color: transparent var(--accent) transparent transparent;
+  box-shadow: -2px 2px 4px rgba(0,0,0,0.12);
+}
+
+/* Unfolded Inside State */
+.origami-inside {
+  background: var(--card);
+  border: 2px solid var(--accent);
+  transform: rotateY(180deg);
+  text-align: center;
+  background-image: radial-gradient(color-mix(in srgb, var(--accent) 10%, transparent) 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+}
+.origami-card.unfolded .origami-front {
+  transform: rotateY(-180deg);
+}
+.origami-card.unfolded .origami-inside {
+  transform: rotateY(0deg);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.origami-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.origami-skill-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.origami-level {
+  font-size: 0.76rem;
+  color: var(--ink-dim);
+}
+
+/* Origami Game HUD & Matched Card Glow */
+.origami-game-hud {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 20px;
+  box-shadow: 4px 6px 16px rgba(0,0,0,0.04);
+}
+html[data-theme="origami"] .origami-game-hud {
+  display: flex;
+}
+
+.origami-stats {
+  display: flex;
+  gap: 24px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+.origami-stats strong {
+  color: var(--accent);
+  font-size: 1.05rem;
+}
+
+.origami-card.matched .origami-inside {
+  border-color: #39ff6a !important;
+  box-shadow: 0 0 20px rgba(57,255,106,0.4) !important;
+}
+
+/* Spatial Coordinates for Canvas Nodes */
+html[data-theme="canvas"] #hero {
+  width: 640px !important;
+  left: -320px;
+  top: -320px;
+}
+html[data-theme="canvas"] #about {
+  width: 600px !important;
+  left: -1020px;
+  top: 320px;
+}
+html[data-theme="canvas"] #skills {
+  width: 640px !important;
+  left: 420px;
+  top: 320px;
+}
+html[data-theme="canvas"] #journey {
+  width: 600px !important;
+  left: -1020px;
+  top: 1480px;
+}
+html[data-theme="canvas"] #projects {
+  width: 660px !important;
+  left: 420px;
+  top: 1480px;
+}
+html[data-theme="canvas"] #contact {
+  width: 640px !important;
+  left: -320px;
+  top: 2980px;
+}
+html[data-theme="canvas"] footer {
+  position: absolute !important;
+  width: 640px !important;
+  left: -320px;
+  top: 3950px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+/* Canvas Node Badge Header */
+.canvas-node-badge {
+  display: none;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--border);
+}
+html[data-theme="canvas"] .canvas-node-badge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* SVG Connection Lines */
+#canvas-svg {
+  position: absolute;
+  top: -4000px;
+  left: -4000px;
+  width: 8000px;
+  height: 8000px;
+  pointer-events: none;
+  z-index: -1;
+  display: none;
+}
+html[data-theme="canvas"] #canvas-svg {
+  display: block;
+}
+
+/* Canvas HUD Controls */
+#canvas-hud {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 1000;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  gap: 10px;
+  align-items: center;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.1);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+}
+html[data-theme="canvas"] #canvas-hud {
+  display: flex;
+}
+#canvas-hud button {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.78rem;
+  transition: all 0.2s;
+}
+#canvas-hud button:hover {
+  border-color: var(--accent);
+  color: var(--bg);
+  background: var(--accent);
+}
+.canvas-hud-hint {
+  color: var(--ink-dim);
+  font-size: 0.75rem;
+  border-left: 1px solid var(--border);
+  padding-left: 10px;
+}
+
+/* focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001s !important; transition-duration:.001s !important;}
+}
+</style>
+</head>
+<body>
+
+<div id="loading-screen">
+  <div class="loader-content">
+    <div class="loader-diamond">
+      <div class="diamond-ring"></div>
+      <span class="diamond-text">ED</span>
+    </div>
+    <div class="loader-percentage">000%</div>
+    <div class="loader-progress-bar">
+      <div class="loader-progress-fill"></div>
+    </div>
+    <div class="loader-status">INITIALIZING PORTFOLIO...</div>
+  </div>
+</div>
+
+<div class="grid-bg" id="gridBg"></div>
+<canvas id="theme-effects-canvas" style="position:fixed; inset:0; pointer-events:none; z-index:0; width:100vw; height:100vh;"></canvas>
+<canvas id="cursor-trail-canvas"></canvas>
+<div id="cursor-ring"></div>
+<div id="cursor-dot"></div>
+
+<div id="theme-switcher" role="group" aria-label="Choose a theme">
+  <button data-theme="terminal" title="Terminal / OS">T</button>
+  <button data-theme="retro" title="Retro CRT">R</button>
+  <button data-theme="canvas" title="Infinite Canvas">C</button>
+  <button data-theme="editorial" class="active" title="Editorial Chaos">E</button>
+  <button data-theme="origami" title="3D Origami">O</button>
+  <button id="dark-mode-toggle" title="Toggle Dark Mode" style="border-left:1px solid var(--border); margin-left:2px; padding-left:6px; border-radius:0;">🌙</button>
+</div>
+
+<!-- CONFETTI TRIGGER BUTTON (Bottom-Left Corner) -->
+<button id="confetti-trigger-btn" class="confetti-btn" title="Launch Theme Confetti (20s)">
+  🎉 <span id="confetti-btn-text">Launch Confetti</span>
+</button>
+
+<nav>
+  <div class="logo">ED_</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#" class="nav-resume-btn" title="View / Download Resume (PDF)">📄 Resume</a></li>
+  </ul>
+</nav>
+
+<main id="canvas-world">
+  <svg id="canvas-svg"></svg>
+  
+  <!-- HERO -->
+  <section id="hero" class="wrap">
+    <div class="canvas-node-badge"><span>NODE 01</span><span>HERO / ORIGIN</span></div>
+    <h1 class="reveal glitch hero-title">
+      Hi, I'm <span class="accent">Eswari Dangeti</span><br>
+      <span class="typewriter-container">
+        <span id="hero-typewriter">Software Developer</span><span class="typewriter-cursor">|</span>
+      </span>
+    </h1>
+    <p class="pitch reveal">Second-year CS engineering student building AI-powered products, hackathon projects, and platforms that turn "what if" into something you can click on. Currently exploring generative AI, product thinking, and how to make software feel a little more alive.</p>
+    <div class="btn-row reveal">
+      <a class="btn" href="#projects">See the work</a>
+      <a class="btn" href="#contact">Get in touch</a>
+      <a class="btn hero-resume-btn" href="#">📄 Download Resume</a>
+    </div>
+    <div class="scroll-cue"><span class="line"></span> scroll</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="wrap">
+    <div class="canvas-node-badge"><span>NODE 02</span><span>ABOUT</span></div>
+    <p class="eyebrow reveal">Currently</p>
+    <h2 class="reveal">About the builder behind the screen</h2>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I'm a second-year Computer Science Engineering student at the National Institute of Advanced Technology (NIAT), expected to graduate in 2029. I care about building technology that solves problems people actually have — AI applications, web platforms, and tools that make hard decisions a little easier.</p>
+        <p>Outside of coursework, I'm deep in hackathons, innovation challenges, and the Google Developer Community — always picking up new tools and shipping something with them before the excitement wears off.</p>
+      </div>
+      <div class="reveal">
+        <p class="eyebrow" style="margin-bottom:.8em;">Toolbox</p>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">C++</span><span class="tag">SQL</span>
+          <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">REST APIs</span>
+          <span class="tag">Firebase</span><span class="tag">Supabase</span><span class="tag">SQLite</span>
+          <span class="tag">OpenAI API</span><span class="tag">Gemini API</span><span class="tag">Prompt Engineering</span>
+          <span class="tag">Figma</span><span class="tag">Git / GitHub</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="wrap">
+    <div class="canvas-node-badge"><span>NODE 03</span><span>SKILLS</span></div>
+    <p class="eyebrow reveal" id="skills-eyebrow">Interactive Skill Hub</p>
+    <h2 class="reveal" id="skills-title">Skills &amp; Interactive Experiences</h2>
+
+    <!-- 1. TERMINAL THEME: HACK THE STACK (TYPING RACE) -->
+    <div id="terminal-game-wrap" class="theme-game-container reveal">
+      <div class="terminal-game-box">
+        <div class="terminal-game-bar">
+          <span>root@eswari:~# hack-stack --target=skill</span>
+          <span class="terminal-stats">
+            LIVES: <strong id="term-lives" style="color:#ff2fa0;">❤️❤️❤️</strong> | SCORE: <strong id="term-score">0000</strong> | STREAK: <strong id="term-streak">0x</strong>
+            <button id="term-start-btn" class="reset-btn" style="margin-left: 10px; padding: 2px 8px; font-size: 0.75rem;">▶ Start Game</button>
+            <button id="term-stop-btn" class="reset-btn" style="margin-left: 6px; padding: 2px 8px; font-size: 0.75rem;">⏹ Stop Game</button>
+          </span>
+        </div>
+        <div class="terminal-command-wrap">
+          <span class="term-label">TYPE COMMAND:</span>
+          <div id="term-target-cmd" class="term-cmd-text">compile react.js</div>
+        </div>
+        <div class="terminal-input-wrap">
+          <span class="term-prompt">&gt;</span>
+          <input type="text" id="term-input" placeholder="type command here..." autocomplete="off" spellcheck="false">
+        </div>
+        <div class="terminal-timer-bg">
+          <div id="term-timer-progress"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. RETRO CRT THEME: SKILL BREAKOUT ARCADE -->
+    <div id="retro-game-wrap" class="theme-game-container reveal">
+      <div class="retro-game-hud">
+        <span>SCORE: <strong id="retro-score">0000</strong></span>
+        <span>LIVES: <strong id="retro-lives">3</strong></span>
+        <div style="display:flex; gap:8px;">
+          <button id="retro-start-btn" class="reset-btn">🎮 Start Arcade Game</button>
+          <button id="retro-pause-btn" class="reset-btn">⏸ Pause Game</button>
+        </div>
+      </div>
+      <canvas id="retro-breakout-canvas" width="680" height="380"></canvas>
+    </div>
+
+    <!-- 3. INFINITE CANVAS THEME: CONSTELLATION MAP -->
+    <div id="canvas-game-wrap" class="theme-game-container reveal">
+      <div class="constellation-hud">
+        <span>CLICK 2 SKILLS TO DRAW A CONSTELLATION CONNECTION</span>
+        <button id="constellation-reset-btn" class="reset-btn">↻ Reset Lines</button>
+      </div>
+      <div id="constellation-board" class="constellation-board">
+        <svg id="constellation-svg"></svg>
+        <div class="constellation-nodes">
+          <button class="c-node" data-id="python" style="top:20%; left:12%;">Python 🐍</button>
+          <button class="c-node" data-id="react" style="top:20%; left:45%;">React.js ⚛️</button>
+          <button class="c-node" data-id="node" style="top:35%; left:75%;">Node.js ⚡</button>
+          <button class="c-node" data-id="firebase" style="top:72%; left:65%;">Firebase 🔥</button>
+          <button class="c-node" data-id="gemini" style="top:68%; left:22%;">Gemini API ✨</button>
+          <button class="c-node" data-id="openai" style="top:45%; left:35%;">OpenAI API 🤖</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. EDITORIAL THEME: MANUSCRIPT PROOFREADING (SPOT THE TYPOS) -->
+    <div id="editorial-game-wrap" class="theme-game-container reveal">
+      <div class="editorial-hud" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <span>SPOT &amp; CLICK 5 TYPOS IN THE MANUSCRIPT BEFORE TIMER EXPIRES</span>
+        <div class="ed-stats" style="display:flex; gap:16px; font-weight:700;">
+          <span>ERRORS FOUND: <strong id="ed-found-score" style="color:var(--accent);">0 / 5</strong></span>
+          <span>TIME LEFT: <strong id="ed-timer" style="color:var(--accent);">25s</strong></span>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button id="ed-start-btn" class="reset-btn">▶ Start Game</button>
+          <button id="ed-stop-btn" class="reset-btn">⏹ Stop Game</button>
+          <button id="editorial-reset-btn" class="reset-btn">↻ New Proofread Draft</button>
+        </div>
+      </div>
+
+      <div class="editorial-manuscript-card">
+        <div class="manuscript-header">
+          <span id="manuscript-tag-header" class="manuscript-tag">DRAFT REVISION #01 · CORE BIO</span>
+          <button id="red-pen-toggle-btn" class="red-pen-mark" style="background:none; border:none; font:inherit; cursor:pointer; padding:0;">🖊️ RED PEN ACTIVE</button>
+        </div>
+        <p id="manuscript-text-body" class="manuscript-text"></p>
+      </div>
+    </div>
+
+    <!-- 5. ORIGAMI THEME: 3D ORIGAMI MEMORY MATCH -->
+    <div id="origami-game-wrap" class="theme-game-container reveal">
+      <div class="origami-game-hud">
+        <div class="origami-stats">
+          <span>Score: <strong id="origami-score">0 / 6</strong></span>
+          <span>Moves: <strong id="origami-moves">0</strong></span>
+        </div>
+        <button id="origami-reset-btn" class="reset-btn" title="Shuffle & Restart Mini-Game">🔀 New Game</button>
+      </div>
+      <div class="origami-skills-grid" id="origami-game-grid"></div>
+    </div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section id="journey" class="wrap">
+    <div class="canvas-node-badge"><span>NODE 04</span><span>JOURNEY &amp; TIMELINE</span></div>
+    <p class="eyebrow reveal">Journey</p>
+    <h2 class="reveal">Community, hackathons &amp; ideation</h2>
+    <div class="timeline">
+      <div class="t-item reveal">
+        <span class="date">2026 — Present</span>
+        <h3>Google Developer Community Member</h3>
+        <p>Active participant in technical workshops, developer events, hackathons, and community learning programs — continuously exploring emerging technologies and development practices.</p>
+      </div>
+      <div class="t-item reveal">
+        <span class="date">Ongoing</span>
+        <h3>Hackathon &amp; Innovation Challenge Participant</h3>
+        <p>Building and shipping AI and software solutions for real-world problems under time pressure — where IdeaForge AI and Breakpoint Library both started.</p>
+      </div>
+      <div class="t-item reveal">
+        <span class="date">Ongoing</span>
+        <h3>Ideation &amp; Innovation Event Presenter</h3>
+        <p>Presenting technical projects and product ideas to peers and mentors, sharpening how I pitch and explain what I build.</p>
+      </div>
+      <div class="t-item reveal">
+        <span class="date">Expected 2029</span>
+        <h3>B.Tech, Computer Science Engineering</h3>
+        <p>National Institute of Advanced Technology (NIAT).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="wrap">
+    <div class="canvas-node-badge"><span>NODE 05</span><span>PROJECTS</span></div>
+    <p class="eyebrow reveal">Selected work</p>
+    <h2 class="reveal">Things I've shipped</h2>
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <span class="num">01 / IdeaForge AI</span>
+        <h3>IdeaForge AI</h3>
+        <p>AI-powered business idea viability analyzer. Takes a plain-language pitch and scores feasibility, market demand, scalability, competition, and risk — then generates a structured summary and recommendations, plus a Shark Tank-style investor simulation and community idea sharing.</p>
+        <div class="proj-links">
+          <a href="https://ideaforgeaitakeoverhackathon.netlify.app/" target="_blank" rel="noopener">Live demo ↗</a>
+          <a href="https://github.com/Eswaridangeti/IdeaForge.git" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <span class="num">02 / Breakpoint Library</span>
+        <h3>Breakpoint Library</h3>
+        <p>An engineering-failure knowledge exchange platform — a centralized place to document and share project failures so others can learn from them, improve future outcomes, and collaborate on solving what broke.</p>
+        <div class="proj-links">
+          <a href="https://breakpointlibrary.netlify.app/" target="_blank" rel="noopener">Live demo ↗</a>
+          <a href="https://github.com/Eswaridangeti/Breakpoint-Library.git" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <span class="num">03 / CampusFlow</span>
+        <h3>CampusFlow</h3>
+        <p>A smart campus management platform that streamlines student activities and operations, improves communication between students, faculty and administration, and makes resource management and accessibility a first-class concern.</p>
+        <div class="proj-links">
+          <a href="https://campusflow.base44.app" target="_blank" rel="noopener">Live demo ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="wrap">
+    <div class="canvas-node-badge"><span>NODE 06</span><span>CONTACT &amp; DIRECT</span></div>
+    <p class="eyebrow reveal">Let's talk</p>
+    <h2 class="reveal">Building something? I'd love to hear about it.</h2>
+    <div class="c-wrap" style="margin-top:3.5em;">
+      <form class="reveal" id="contactForm">
+        <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" required></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+        <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="4" required></textarea></div>
+        <button class="btn" type="submit">Send message</button>
+      </form>
+      <div class="reveal">
+        <p class="eyebrow" style="margin-bottom:1em;">Direct</p>
+        <div class="contact-links">
+          <a href="mailto:eswari.d2011@gmail.com">eswari.d2011@gmail.com</a>
+          <a href="https://linkedin.com/in/eswari-dangeti" target="_blank" rel="noopener">linkedin.com/in/eswari-dangeti ↗</a>
+          <a href="https://github.com/Eswaridangeti" target="_blank" rel="noopener">github.com/Eswaridangeti ↗</a>
+          <a href="#" class="contact-resume-btn" style="color:var(--accent); font-weight:700;">📄 Download Resume (PDF) ↗</a>
+          <span style="color:var(--ink-dim); font-size:.85rem;">Andhra Pradesh, India</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Eswari Dangeti</span>
+    <span>Built with curiosity, caffeine, and too many browser tabs.</span>
+  </footer>
+</main>
+
+<!-- CANVAS SPATIAL HUD CONTROLS -->
+<div id="canvas-hud">
+  <button id="canvas-zoom-out" title="Zoom Out">−</button>
+  <button id="canvas-zoom-in" title="Zoom In">+</button>
+  <button id="canvas-reset" title="Center View">Center</button>
+  <span class="canvas-hud-hint">🖱️ Drag to pan · Scroll to zoom</span>
+</div>
+
+<!-- FEATURE 1 & 3: DEV TERMINAL CONSOLE WIDGET & THEMED CHATBOT -->
+<button id="view-resume-floating-btn" title="View Interactive Resume">
+  📄 View Resume
+</button>
+
+<button id="dev-terminal-dock-btn" title="Open Dev Console (v1.0)">
+  <span class="pulse-dot"></span>
+  💻 DEV TERMINAL
+</button>
+
+<!-- SCROLL TO TOP PROGRESS RING BUTTON -->
+<button id="scroll-to-top-btn" title="Scroll to Top">
+  <svg class="progress-ring" width="44" height="44">
+    <circle class="progress-ring__circle" stroke="var(--accent)" stroke-width="2.5" fill="transparent" r="18" cx="22" cy="22"/>
+  </svg>
+  <span class="arrow">↑</span>
+</button>
+
+<div id="dev-console-overlay"></div>
+<div id="dev-console-window" role="region" aria-label="Dev Terminal Console">
+  <div class="console-header-bar">
+    <div class="console-controls">
+      <span class="console-prompt-sym">&gt;_</span>
+      <span class="console-title-text">DEV TERMINAL</span>
+    </div>
+    <button id="dev-console-close" class="console-close-btn" title="Close Terminal">×</button>
+  </div>
+  <div id="dev-console-output" class="console-output-area"></div>
+  <div class="console-input-row">
+    <span class="console-prompt-label">eswari@portfolio:~$</span>
+    <input type="text" id="dev-console-input" placeholder="type command (e.g. 'help', 'ask skills')..." autocomplete="off" spellcheck="false">
+  </div>
+</div>
+
+<!-- INTERACTIVE RESUME MODAL -->
+<div id="interactive-resume-modal" role="dialog" aria-modal="true" aria-label="Eswari Dangeti's Interactive Resume">
+  <div class="resume-modal-header">
+    <button class="resume-header-btn back-btn" id="resume-back-btn">← Back to Portfolio</button>
+    <div class="resume-header-actions">
+      <button class="resume-header-btn print-btn" id="resume-print-btn">🖨️ Print / Save PDF</button>
+      <a href="eswari_dangeti_resume.pdf" target="_blank" download="Eswari_Dangeti_Resume.pdf" class="resume-header-btn download-btn" id="resume-download-btn">📥 Download PDF</a>
+    </div>
+    <button class="resume-modal-close" id="resume-modal-close" title="Close Resume">×</button>
+  </div>
+  
+  <div class="resume-modal-content">
+    <div class="resume-paper">
+      <!-- HEADER -->
+      <header class="resume-header">
+        <div class="resume-title-group">
+          <h1>Eswari Dangeti</h1>
+          <p class="resume-subtitle">Software Developer &amp; AI Builder</p>
+        </div>
+        <div class="resume-contact-info">
+          <div class="contact-item">📍 Andhra Pradesh, India</div>
+          <div class="contact-item">✉️ <a href="mailto:eswari.d2011@gmail.com">eswari.d2011@gmail.com</a></div>
+          <div class="contact-item">🔗 <a href="https://linkedin.com/in/eswari-dangeti" target="_blank">linkedin.com/in/eswari-dangeti</a></div>
+          <div class="contact-item">🐙 <a href="https://github.com/Eswaridangeti" target="_blank">github.com/Eswaridangeti</a></div>
+        </div>
+      </header>
+
+      <!-- PROFILE SUMMARY -->
+      <section class="resume-section">
+        <h2 class="resume-section-title">✦ Profile Summary</h2>
+        <div class="resume-section-body">
+          <p>Second-year Computer Science Engineering student building AI-powered products, hackathon platforms, and intuitive interfaces. Passionate about prompt engineering, full-stack development, and creating software that solves actual user problems.</p>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section class="resume-section">
+        <h2 class="resume-section-title">✦ Education</h2>
+        <div class="resume-section-body">
+          <div class="education-item">
+            <div class="edu-header">
+              <span class="edu-degree">Bachelor of Technology (B.Tech) in Computer Science Engineering</span>
+              <span class="edu-date">Expected Graduation: 2029</span>
+            </div>
+            <p class="edu-school">National Institute of Advanced Technology (NIAT)</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TECHNICAL SKILLS -->
+      <section class="resume-section">
+        <h2 class="resume-section-title">✦ Technical Skills</h2>
+        <div class="resume-section-body">
+          <div class="skills-category-grid">
+            <div class="skills-category-card">
+              <h3>Frontend Technologies</h3>
+              <div class="skills-tag-list">
+                <span>HTML5 / CSS3</span>
+                <span>JavaScript (ES6+)</span>
+                <span>React.js</span>
+              </div>
+            </div>
+            <div class="skills-category-card">
+              <h3>Backend Technologies</h3>
+              <div class="skills-tag-list">
+                <span>Node.js</span>
+                <span>REST APIs</span>
+                <span>Python</span>
+                <span>C++</span>
+              </div>
+            </div>
+            <div class="skills-category-card">
+              <h3>Databases</h3>
+              <div class="skills-tag-list">
+                <span>SQL</span>
+                <span>SQLite</span>
+                <span>Firebase</span>
+                <span>Supabase</span>
+              </div>
+            </div>
+            <div class="skills-category-card">
+              <h3>AI &amp; Data</h3>
+              <div class="skills-tag-list">
+                <span>Generative AI</span>
+                <span>Prompt Engineering</span>
+                <span>OpenAI APIs</span>
+                <span>Google Gemini APIs</span>
+              </div>
+            </div>
+            <div class="skills-category-card">
+              <h3>Tools &amp; Concepts</h3>
+              <div class="skills-tag-list">
+                <span>Git &amp; GitHub</span>
+                <span>Figma</span>
+                <span>VS Code</span>
+                <span>Vercel / Netlify</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="resume-section">
+        <h2 class="resume-section-title">✦ Featured Projects</h2>
+        <div class="resume-section-body">
+          <div class="resume-project-item">
+            <div class="project-header">
+              <span class="project-name">IdeaForge AI — Business Viability Analyzer</span>
+              <span class="project-link"><a href="https://ideaforgeaitakeoverhackathon.netlify.app/" target="_blank">Live Demo ↗</a></span>
+            </div>
+            <p class="project-desc">Evaluates startup ideas using LLM scoring across feasibility, market demand, scalability, and risk. Generates custom reports, investor mock feedback, and features a community feed for idea sharing.</p>
+          </div>
+          <div class="resume-project-item">
+            <div class="project-header">
+              <span class="project-name">Breakpoint Library — Engineering Knowledge Exchange</span>
+              <span class="project-link"><a href="https://breakpointlibrary.netlify.app/" target="_blank">Live Demo ↗</a></span>
+            </div>
+            <p class="project-desc">A collaborative repository designed for developers to document engineering errors, post-mortem writeups, and resolutions, fostering peer learning and reducing debugging time.</p>
+          </div>
+          <div class="resume-project-item">
+            <div class="project-header">
+              <span class="project-name">CampusFlow — Smart Campus Management</span>
+              <span class="project-link"><a href="https://campusflow.base44.app" target="_blank">Live Demo ↗</a></span>
+            </div>
+            <p class="project-desc">Streamlines student activity scheduling, resources booking, and administrator communication inside a unified, accessibility-first dashboard.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- LEADERSHIP & COMMUNITY -->
+      <section class="resume-section">
+        <h2 class="resume-section-title">✦ Leadership &amp; Community</h2>
+        <div class="resume-section-body">
+          <ul class="community-list">
+            <li><strong>Google Developer Community Member (2026 – Present):</strong> Active participant in workshops, hackathons, and technical panels.</li>
+            <li><strong>Hackathon Competitor:</strong> Regularly prototyping and shipping MVP platforms under tight deadlines.</li>
+            <li><strong>Technical Ideation Presenter:</strong> Pitching projects and technical blueprints to industry mentors.</li>
+          </ul>
+        </div>
+      </section>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===================== LOADER SCREEN & SCROLL TO TOP ===================== */
+const loadingScreen = document.getElementById('loading-screen');
+const percentEl = document.querySelector('.loader-percentage');
+const fillEl = document.querySelector('.loader-progress-fill');
+const statusEl = document.querySelector('.loader-status');
+
+const statusMessages = [
+  "Initializing modules...",
+  "Loading portfolio structures...",
+  "Setting up layout matrices...",
+  "Compiling interactive elements...",
+  "Syncing physics engine...",
+  "Ready"
+];
+
+function runInitialLoader(callback) {
+  let progress = 0;
+  let messageIndex = 0;
+
+  const interval = setInterval(() => {
+    progress += Math.floor(Math.random() * 4) + 1;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(interval);
+      if (percentEl) percentEl.textContent = "100%";
+      if (fillEl) fillEl.style.width = "100%";
+      if (statusEl) statusEl.textContent = "Ready";
+      
+      setTimeout(() => {
+        if (loadingScreen) {
+          loadingScreen.style.opacity = 0;
+          setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            if (callback) callback();
+          }, 400);
+        }
+      }, 500);
+    } else {
+      if (percentEl) percentEl.textContent = String(progress).padStart(3, '0') + '%';
+      if (fillEl) fillEl.style.width = progress + '%';
+      
+      if (progress > messageIndex * 18) {
+        if (statusEl) statusEl.textContent = statusMessages[messageIndex % statusMessages.length];
+        messageIndex++;
+      }
+    }
+  }, 25);
+}
+
+function triggerThemeLoading(themeName, applyThemeCallback) {
+  if (!loadingScreen) {
+    applyThemeCallback();
+    return;
+  }
+  
+  loadingScreen.style.display = 'flex';
+  loadingScreen.style.opacity = 1;
+  if (fillEl) fillEl.style.width = '0%';
+  if (percentEl) percentEl.textContent = '000%';
+  if (statusEl) statusEl.textContent = `CONFIGURING ${themeName.toUpperCase()} THEME...`;
+  
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += 8;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(interval);
+      if (percentEl) percentEl.textContent = '100%';
+      if (fillEl) fillEl.style.width = '100%';
+      if (statusEl) statusEl.textContent = 'SYSTEM LOADED';
+      
+      try {
+        applyThemeCallback();
+      } catch (err) {
+        console.error("Error applying theme switch:", err);
+      }
+      
+      setTimeout(() => {
+        loadingScreen.style.opacity = 0;
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+        }, 400);
+      }, 300);
+    } else {
+      if (percentEl) percentEl.textContent = String(progress).padStart(3, '0') + '%';
+      if (fillEl) fillEl.style.width = progress + '%';
+    }
+  }, 20);
+}
+
+// Run initial loader
+runInitialLoader();
+
+// Scroll to Top Progress Indicator Logic
+const scrollBtn = document.getElementById('scroll-to-top-btn');
+const progressCircle = document.querySelector('.progress-ring__circle');
+const circumference = 2 * Math.PI * 18; // 113.097
+
+if (progressCircle) {
+  progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+  progressCircle.style.strokeDashoffset = circumference;
+}
+
+window.addEventListener('scroll', () => {
+  if (!scrollBtn) return;
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  
+  // Show / hide button only when scrolling down
+  if (scrollTop > 300) {
+    scrollBtn.classList.add('visible');
+  } else {
+    scrollBtn.classList.remove('visible');
+  }
+
+  // Update progress ring
+  if (docHeight > 0) {
+    const scrollPercent = scrollTop / docHeight;
+    const offset = circumference - (scrollPercent * circumference);
+    if (progressCircle) {
+      progressCircle.style.strokeDashoffset = offset;
+    }
+  }
+});
+
+if (scrollBtn) {
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/* ===================== THEME SWITCHER & DARK MODE ===================== */
+const themeBtns = document.querySelectorAll('#theme-switcher button[data-theme]');
+const root = document.documentElement;
+const skillsEyebrow = document.getElementById('skills-eyebrow');
+const skillsTitle = document.getElementById('skills-title');
+const darkModeBtn = document.getElementById('dark-mode-toggle');
+
+let isDark = localStorage.getItem('mode') === 'dark';
+function applyDarkMode(dark){
+  isDark = dark;
+  if(isDark){
+    root.setAttribute('data-mode', 'dark');
+    if(darkModeBtn) darkModeBtn.textContent = '☀️';
+  } else {
+    root.removeAttribute('data-mode');
+    if(darkModeBtn) darkModeBtn.textContent = '🌙';
+  }
+  localStorage.setItem('mode', isDark ? 'dark' : 'light');
+}
+
+if(darkModeBtn){
+  darkModeBtn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    applyDarkMode(!isDark);
+    if(typeof playTick === 'function') playTick();
+  });
+}
+if(isDark) applyDarkMode(true);
+
+function updateSkillsHeading(){
+  const theme = root.getAttribute('data-theme');
+  if(skillsEyebrow){
+    if(theme === 'terminal') skillsEyebrow.textContent = '⌨️ Terminal / OS';
+    else if(theme === 'retro') skillsEyebrow.textContent = '🕹️ Retro CRT Arcade';
+    else if(theme === 'canvas') skillsEyebrow.textContent = '🌌 Infinite Canvas Graph';
+    else if(theme === 'editorial') skillsEyebrow.textContent = '✒️ Manuscript Proofreading';
+    else if(theme === 'origami') skillsEyebrow.textContent = '📄 3D Paper Origami';
+    else skillsEyebrow.textContent = 'Interactive Skill Hub';
+  }
+  if(skillsTitle){
+    if(theme === 'terminal') skillsTitle.textContent = 'Hack the Stack: Typing Race';
+    else if(theme === 'retro') skillsTitle.textContent = 'Skill Arcade: Breakout Smash';
+    else if(theme === 'canvas') skillsTitle.textContent = 'Constellation Map: Skill Clusters';
+    else if(theme === 'editorial') skillsTitle.textContent = 'Proofreading: Spot the Manuscript Typos';
+    else if(theme === 'origami') skillsTitle.textContent = 'Fold to Reveal: Origami Memory';
+    else skillsTitle.textContent = 'Skills & Interactive Experiences';
+  }
+}
+
+themeBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const t = btn.dataset.theme;
+    triggerThemeLoading(t, () => {
+      root.setAttribute('data-theme', t);
+      themeBtns.forEach(b=>b.classList.toggle('active', b===btn));
+      updateSkillsHeading();
+      if(typeof window.stopAllActiveThemeGames === 'function') window.stopAllActiveThemeGames();
+      if(typeof playTick === 'function') playTick();
+    });
+  });
+});
+updateSkillsHeading();
+
+/* ===================== SMART HIDE/REVEAL NAV ON SCROLL ===================== */
+const navEl = document.querySelector('nav');
+let lastScrollY = window.scrollY;
+
+window.addEventListener('scroll', ()=>{
+  const currentScrollY = window.scrollY;
+  if(!navEl) return;
+
+  if(currentScrollY <= 30){
+    navEl.classList.remove('nav-hidden');
+  } else if(currentScrollY > lastScrollY && currentScrollY > 100){
+    navEl.classList.add('nav-hidden');
+  } else if(currentScrollY < lastScrollY){
+    navEl.classList.remove('nav-hidden');
+  }
+
+  lastScrollY = currentScrollY;
+});
+
+/* ===================== CUSTOM CURSOR & DYNAMIC THEME TRAILS ===================== */
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+const trailCanvas = document.getElementById('cursor-trail-canvas');
+let mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my;
+const isTouch = matchMedia('(hover: none)').matches;
+
+if(!isTouch && dot && ring && trailCanvas){
+  const tCtx = trailCanvas.getContext('2d');
+  let tw = trailCanvas.width = window.innerWidth;
+  let th = trailCanvas.height = window.innerHeight;
+  let particles = [];
+  let isMoving = false;
+  let moveTimeout;
+
+  window.addEventListener('resize', ()=>{
+    tw = trailCanvas.width = window.innerWidth;
+    th = trailCanvas.height = window.innerHeight;
+  });
+
+  window.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top = my + 'px';
+
+    dot.classList.remove('hidden');
+    ring.classList.remove('hidden');
+
+    isMoving = true;
+    clearTimeout(moveTimeout);
+    moveTimeout = setTimeout(() => { isMoving = false; }, 80);
+
+    // Spawn theme-specific trail particles
+    const theme = document.documentElement.getAttribute('data-theme') || 'editorial';
+    const computedAccent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#39ff6a';
+    const computedAccent2 = getComputedStyle(document.documentElement).getPropertyValue('--accent2').trim() || '#00c2ff';
+
+    const count = theme === 'retro' ? 2 : (theme === 'origami' ? 1 : 2);
+    for(let i = 0; i < count; i++){
+      particles.push({
+        x: mx + (Math.random() - 0.5) * 6,
+        y: my + (Math.random() - 0.5) * 6,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: (Math.random() - 0.5) * 1.5 + (theme === 'canvas' ? -0.5 : 0.2),
+        size: theme === 'terminal' ? Math.random() * 3 + 2 : (theme === 'editorial' ? Math.random() * 4 + 1 : Math.random() * 5 + 2),
+        alpha: 0.85,
+        decay: theme === 'terminal' ? 0.045 : (theme === 'retro' ? 0.035 : 0.03),
+        theme: theme,
+        color: Math.random() > 0.4 ? computedAccent : computedAccent2,
+        rotation: Math.random() * Math.PI * 2,
+        vRot: (Math.random() - 0.5) * 0.1
+      });
+    }
+  });
+
+  document.addEventListener('mouseleave', () => {
+    dot.classList.add('hidden');
+    ring.classList.add('hidden');
+  });
+
+  document.addEventListener('mouseenter', () => {
+    dot.classList.remove('hidden');
+    ring.classList.remove('hidden');
+  });
+
+  // Smooth ring follow loop
+  (function followLoop(){
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(followLoop);
+  })();
+
+  // Render cursor trail particles
+  function renderTrail(){
+    tCtx.clearRect(0, 0, tw, th);
+
+    for(let i = particles.length - 1; i >= 0; i--){
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.alpha -= p.decay;
+      p.rotation += p.vRot;
+
+      if(p.alpha <= 0){
+        particles.splice(i, 1);
+        continue;
+      }
+
+      tCtx.save();
+      tCtx.globalAlpha = p.alpha;
+      tCtx.translate(p.x, p.y);
+      tCtx.rotate(p.rotation);
+
+      if(p.theme === 'terminal'){
+        // Terminal: Crisp glowing pixel phosphor matrix trails
+        tCtx.fillStyle = p.color;
+        tCtx.shadowColor = p.color;
+        tCtx.shadowBlur = 6;
+        tCtx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+      } else if(p.theme === 'retro'){
+        // Retro CRT: Dual-tone neon sparkling stars/diamonds
+        tCtx.fillStyle = p.color;
+        tCtx.shadowColor = p.color;
+        tCtx.shadowBlur = 8;
+        tCtx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+      } else if(p.theme === 'canvas'){
+        // Canvas: Glowing starlight nebula circles with connecting subtle rays
+        tCtx.fillStyle = p.color;
+        tCtx.shadowColor = p.color;
+        tCtx.shadowBlur = 8;
+        tCtx.beginPath();
+        tCtx.arc(0, 0, p.size, 0, Math.PI * 2);
+        tCtx.fill();
+      } else if(p.theme === 'origami'){
+        // Origami: Paper-folded geometric shards
+        tCtx.fillStyle = p.color;
+        tCtx.beginPath();
+        tCtx.moveTo(0, -p.size);
+        tCtx.lineTo(p.size, p.size);
+        tCtx.lineTo(-p.size, p.size * 0.6);
+        tCtx.closePath();
+        tCtx.fill();
+      } else {
+        // Editorial: Subtle calligraphic ink droplets & diamond dust
+        tCtx.fillStyle = p.color;
+        tCtx.beginPath();
+        tCtx.moveTo(0, -p.size * 1.2);
+        tCtx.lineTo(p.size * 0.7, 0);
+        tCtx.lineTo(0, p.size * 1.2);
+        tCtx.lineTo(-p.size * 0.7, 0);
+        tCtx.closePath();
+        tCtx.fill();
+      }
+      tCtx.restore();
+    }
+
+    requestAnimationFrame(renderTrail);
+  }
+  renderTrail();
+
+  // Hover magnetics & expansion across all interactive controls
+  const attachHoverListeners = () => {
+    document.querySelectorAll('a, button, nav a, #theme-switcher button, .proj-card, .field input, .field textarea, [role="button"]').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    });
+  };
+  attachHoverListeners();
+}
+
+/* ===================== SCROLL REVEAL ===================== */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ===================== THEME EFFECTS & 3D BACKGROUND SCENE ENGINE ===================== */
+(function(){
+  const canvas = document.getElementById('theme-effects-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+
+  let mouseX = w / 2, mouseY = h / 2;
+  window.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  window.addEventListener('resize', ()=>{
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    initThemeEffect();
+  });
+
+  function getTheme(){
+    return document.documentElement.getAttribute('data-theme') || 'editorial';
+  }
+  function isDarkMode(){
+    return document.documentElement.getAttribute('data-mode') === 'dark';
+  }
+
+  // ----------------------------------------------------
+  // 1. TERMINAL: CONTINUOUS VERTICAL SYSTEM BOOT / LOG STREAM
+  // ----------------------------------------------------
+  const terminalLogTemplates = [
+    "[OK] Loading neural_net.py...",
+    "[OK] Connecting to gemini-api...",
+    "[WARN] coffee_level low",
+    "[INFO] Initializing Eswari Dangeti OS v2.026",
+    "[OK] Mounting /dev/projects/ideaforge",
+    "[OK] Fetching GitHub repos (@eswaridangeti)",
+    "[OK] Loaded Python 3.12 runtime",
+    "[INFO] Launching React.js dev server on port 3000...",
+    "[OK] Socket connected to firebase_db",
+    "[OK] Prompt engineering pipeline initialized",
+    "[WARN] memory_usage high: 84%",
+    "[OK] Compiling C++ data structures...",
+    "[INFO] NIAT CS Engineering Session: Active",
+    "[OK] Syncing Breakpoint Library DB...",
+    "[OK] CampusFlow API heartbeat: 200 OK",
+    "[SUCCESS] All system modules operational"
+  ];
+
+  let terminalLogs = [];
+  let logTimer = 0;
+  const matrixChars = '01XYZ>_{};$#@%&*+=?~';
+  let matrixCols = [];
+
+  function initTerminalScene(){
+    terminalLogs = [];
+    logTimer = 0;
+    const lineSpacing = 24;
+    const initialLines = Math.ceil(h / lineSpacing) + 6;
+
+    for(let i = 0; i < initialLines; i++){
+      const template = terminalLogTemplates[i % terminalLogTemplates.length];
+      terminalLogs.push({
+        text: template,
+        y: h - i * lineSpacing
+      });
+    }
+
+    // Matrix confetti columns
+    const colCount = Math.floor(w / 18);
+    matrixCols = [];
+    for(let i = 0; i < colCount; i++){
+      matrixCols.push({
+        x: i * 18,
+        y: Math.random() * -h,
+        speed: 3 + Math.random() * 6
+      });
+    }
+  }
+
+  function drawTerminalScene(){
+    ctx.clearRect(0, 0, w, h);
+    logTimer++;
+
+    // Periodically append new system log line
+    if(logTimer % 18 === 0){
+      const template = terminalLogTemplates[Math.floor(Math.random() * terminalLogTemplates.length)];
+      terminalLogs.push({
+        text: template,
+        y: h + 24
+      });
+    }
+
+    ctx.font = '13.5px "JetBrains Mono", monospace';
+
+    // Scroll log lines upward smoothly
+    for(let i = terminalLogs.length - 1; i >= 0; i--){
+      const log = terminalLogs[i];
+      log.y -= 1.1;
+
+      // Color coding tag styling
+      if(log.text.startsWith('[OK]')) ctx.fillStyle = 'rgba(57, 255, 106, 0.22)';
+      else if(log.text.startsWith('[WARN]')) ctx.fillStyle = 'rgba(255, 204, 51, 0.38)';
+      else if(log.text.startsWith('[INFO]')) ctx.fillStyle = 'rgba(34, 229, 255, 0.38)';
+      else if(log.text.startsWith('[SUCCESS]')) ctx.fillStyle = 'rgba(57, 255, 106, 0.45)';
+      else ctx.fillStyle = 'rgba(57, 255, 106, 0.2)';
+
+      ctx.fillText(log.text, Math.max(20, w * 0.05), log.y);
+
+      if(log.y < -30){
+        terminalLogs.splice(i, 1);
+      }
+    }
+
+    // Confetti mode: Matrix code stream
+    if(isConfettiActive){
+      ctx.font = '14px "JetBrains Mono", monospace';
+      matrixCols.forEach(col => {
+        const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        ctx.fillStyle = '#a3ffbe';
+        ctx.fillText(char, col.x, col.y);
+        ctx.fillStyle = 'rgba(57, 255, 106, 0.7)';
+        ctx.fillText(matrixChars[Math.floor(Math.random() * matrixChars.length)], col.x, col.y - 18);
+
+        col.y += col.speed;
+        if(col.y > h + 50){
+          col.y = Math.random() * -80;
+          col.speed = 3 + Math.random() * 6;
+        }
+      });
+    }
+  }
+
+  // ----------------------------------------------------
+  // 2. ORIGAMI: FOLDING PAPER FIELD (FLAT-SHADED FACETS)
+  // ----------------------------------------------------
+  let origamiShapes = [];
+  let origamiConfettiShreds = [];
+
+  function initOrigamiScene(){
+    origamiShapes = [];
+    const numShapes = 16;
+    const colors = ['#f6f3ea', '#e64a19', '#00897b', '#d8cfc4', '#f57c00'];
+
+    for(let i = 0; i < numShapes; i++){
+      origamiShapes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        z: 100 + Math.random() * 400,
+        size: 35 + Math.random() * 45,
+        rotX: Math.random() * Math.PI * 2,
+        rotY: Math.random() * Math.PI * 2,
+        rotZ: Math.random() * Math.PI * 2,
+        vRotX: (Math.random() - 0.5) * 0.012,
+        vRotY: (Math.random() - 0.5) * 0.012,
+        vy: 0.2 + Math.random() * 0.4,
+        color: colors[i % colors.length]
+      });
+    }
+
+    // Extra shreds for confetti burst
+    origamiConfettiShreds = [];
+    for(let i = 0; i < 50; i++){
+      origamiConfettiShreds.push({
+        x: Math.random() * w,
+        y: Math.random() * -h,
+        w: 12 + Math.random() * 16,
+        h: 14 + Math.random() * 20,
+        color: colors[i % colors.length],
+        vy: 1.5 + Math.random() * 2.5,
+        vx: (Math.random() - 0.5) * 1.5,
+        rotX: Math.random() * Math.PI,
+        rotY: Math.random() * Math.PI,
+        vRotX: (Math.random() - 0.5) * 0.08,
+        vRotY: (Math.random() - 0.5) * 0.08
+      });
+    }
+  }
+
+  function drawOrigamiScene(){
+    ctx.clearRect(0, 0, w, h);
+
+    // Render 3D Low-Poly Folded Paper Pyramids & Polyhedra
+    origamiShapes.forEach(s => {
+      ctx.save();
+      ctx.translate(s.x, s.y);
+
+      s.rotX += s.vRotX;
+      s.rotY += s.vRotY;
+
+      // 4 triangular facets forming a 3D folded paper pyramid
+      const facets = [
+        { pts: [[0, -s.size], [s.size * 0.8, s.size * 0.6], [0, 0]], normalAngle: s.rotX },
+        { pts: [[0, -s.size], [0, 0], [-s.size * 0.8, s.size * 0.6]], normalAngle: s.rotY },
+        { pts: [[0, 0], [s.size * 0.8, s.size * 0.6], [0, s.size * 0.9]], normalAngle: s.rotX + 1.2 },
+        { pts: [[-s.size * 0.8, s.size * 0.6], [0, 0], [0, s.size * 0.9]], normalAngle: s.rotY + 1.2 }
+      ];
+
+      facets.forEach((f, idx) => {
+        // Flat shading based on light source angle
+        const light = Math.max(0.25, Math.cos(f.normalAngle + idx * 0.8));
+        ctx.fillStyle = s.color;
+        ctx.globalAlpha = 0.15 + light * 0.45;
+
+        ctx.beginPath();
+        f.pts.forEach((pt, pIdx) => {
+          const rx = pt[0] * Math.cos(s.rotZ) - pt[1] * Math.sin(s.rotZ);
+          const ry = pt[0] * Math.sin(s.rotZ) + pt[1] * Math.cos(s.rotZ);
+          if(pIdx === 0) ctx.moveTo(rx, ry);
+          else ctx.lineTo(rx, ry);
+        });
+        ctx.closePath();
+        ctx.fill();
+
+        // Crease line
+        ctx.strokeStyle = 'rgba(0,0,0,0.12)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+
+      ctx.restore();
+
+      s.y += s.vy;
+      if(s.y > h + 80){
+        s.y = -80;
+        s.x = Math.random() * w;
+      }
+    });
+
+    // Confetti mode: Origami paper shreds falling
+    if(isConfettiActive){
+      origamiConfettiShreds.forEach(p => {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        const scaleX = Math.cos(p.rotY);
+        const scaleY = Math.cos(p.rotX);
+        ctx.scale(scaleX, scaleY);
+        ctx.fillStyle = p.color;
+
+        ctx.beginPath();
+        ctx.moveTo(0, -p.h/2);
+        ctx.lineTo(p.w/2, p.h/2);
+        ctx.lineTo(-p.w/2, p.h/2);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.restore();
+
+        p.y += p.vy;
+        p.x += Math.sin(p.y * 0.015) * p.vx;
+        p.rotX += p.vRotX;
+        p.rotY += p.vRotY;
+
+        if(p.y > h + 30){
+          p.y = -30;
+          p.x = Math.random() * w;
+        }
+      });
+    }
+  }
+
+  // ----------------------------------------------------
+  // 3. EDITORIAL: MOODY ANIMATED INK-IN-WATER SHADER & CONFETTI
+  // ----------------------------------------------------
+  let inkPlumes = [];
+  let inkTime = 0;
+  let editorialConfetti = [];
+  const confettiColors = ['#2f4af5', '#ffcc33', '#ff2fa0', '#39ff6a', '#ff6b35', '#00c2ff'];
+
+  function initEditorialScene(){
+    inkPlumes = [];
+    const numPlumes = 6;
+    for(let i = 0; i < numPlumes; i++){
+      inkPlumes.push({
+        x: (0.15 + Math.random() * 0.7) * w,
+        y: (0.15 + Math.random() * 0.7) * h,
+        baseRadius: Math.min(w, h) * (0.18 + Math.random() * 0.22),
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.002 + Math.random() * 0.003
+      });
+    }
+
+    editorialConfetti = [];
+    for(let i = 0; i < 75; i++){
+      editorialConfetti.push({
+        x: Math.random() * w,
+        y: Math.random() * -h,
+        size: 6 + Math.random() * 8,
+        color: confettiColors[Math.floor(Math.random() * confettiColors.length)],
+        vy: 1.2 + Math.random() * 2.5,
+        vx: (Math.random() - 0.5) * 1.2,
+        rot: Math.random() * Math.PI * 2,
+        vRot: (Math.random() - 0.5) * 0.1,
+        shape: Math.random() > 0.4 ? 'rect' : 'circle'
+      });
+    }
+  }
+
+  function drawEditorialScene(){
+    ctx.clearRect(0, 0, w, h);
+    inkTime += 0.006;
+
+    const dark = isDarkMode();
+
+    // Render Ink-in-Water Plumes
+    inkPlumes.forEach((plume, idx) => {
+      plume.x += Math.sin(inkTime * 0.5 + plume.phase) * 0.4 + plume.vx;
+      plume.y += Math.cos(inkTime * 0.4 + plume.phase) * 0.4 + plume.vy;
+
+      if(plume.x < -120) plume.x = w + 120;
+      if(plume.x > w + 120) plume.x = -120;
+      if(plume.y < -120) plume.y = h + 120;
+      if(plume.y > h + 120) plume.y = -120;
+
+      const numRings = 5;
+      for(let r = numRings; r >= 1; r--){
+        const radiusScale = (r / numRings);
+        const curRadius = plume.baseRadius * radiusScale;
+
+        const grad = ctx.createRadialGradient(
+          plume.x, plume.y, 0,
+          plume.x, plume.y, curRadius
+        );
+
+        if(dark){
+          grad.addColorStop(0, `rgba(99, 102, 241, ${(0.06 / r).toFixed(3)})`);
+          grad.addColorStop(0.6, `rgba(56, 189, 248, ${(0.03 / r).toFixed(3)})`);
+          grad.addColorStop(1, 'rgba(18, 18, 18, 0)');
+        } else {
+          grad.addColorStop(0, `rgba(15, 23, 42, ${(0.08 / r).toFixed(3)})`);
+          grad.addColorStop(0.65, `rgba(30, 41, 59, ${(0.04 / r).toFixed(3)})`);
+          grad.addColorStop(1, 'rgba(249, 247, 241, 0)');
+        }
+
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+
+        const points = 36;
+        for(let p = 0; p <= points; p++){
+          const angle = (p / points) * Math.PI * 2;
+          const deform1 = Math.sin(angle * 3 + inkTime + plume.phase) * (curRadius * 0.22);
+          const deform2 = Math.cos(angle * 5 - inkTime * 0.8 + idx) * (curRadius * 0.15);
+          const deform3 = Math.sin(angle * 2 + inkTime * 1.4) * (curRadius * 0.1);
+          
+          const rad = curRadius + deform1 + deform2 + deform3;
+          const px = plume.x + Math.cos(angle) * rad;
+          const py = plume.y + Math.sin(angle) * rad;
+
+          if(p === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+
+        ctx.closePath();
+        ctx.fill();
+      }
+    });
+
+    // Confetti mode: Classic paper confetti
+    if(isConfettiActive){
+      editorialConfetti.forEach(p => {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+
+        if(p.shape === 'rect'){
+          ctx.fillRect(-p.size/2, -p.size/3, p.size, p.size * 0.6);
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size/2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+
+        p.y += p.vy;
+        p.x += Math.sin(p.y * 0.02) * p.vx;
+        p.rot += p.vRot;
+
+        if(p.y > h + 20){
+          p.y = -20;
+          p.x = Math.random() * w;
+        }
+      });
+    }
+  }
+
+  // ----------------------------------------------------
+  // 4. RETRO: SYNTHWAVE NEON GRID WAVES
+  // ----------------------------------------------------
+  let waveOffset = 0;
+  function drawRetroWaves(){
+    ctx.clearRect(0, 0, w, h);
+    waveOffset += 0.04;
+
+    const horizonY = h * 0.58;
+    const gridLines = 18;
+
+    ctx.strokeStyle = 'rgba(255, 47, 160, 0.45)';
+    ctx.lineWidth = 1.5;
+
+    for(let i = 0; i < gridLines; i++){
+      const progress = ((i + (waveOffset % 1)) / gridLines);
+      const y = horizonY + Math.pow(progress, 2.2) * (h - horizonY);
+      
+      ctx.beginPath();
+      for(let x = 0; x <= w; x += 30){
+        const waveY = y + Math.sin(x * 0.015 + waveOffset + i * 0.4) * (progress * 12);
+        if(x === 0) ctx.moveTo(x, waveY);
+        else ctx.lineTo(x, waveY);
+      }
+      ctx.stroke();
+    }
+
+    ctx.strokeStyle = 'rgba(34, 229, 255, 0.35)';
+    const centerX = w / 2;
+    for(let x = -w; x <= w * 2; x += 90){
+      ctx.beginPath();
+      ctx.moveTo(centerX + (x - centerX) * 0.05, horizonY);
+      ctx.lineTo(x, h);
+      ctx.stroke();
+    }
+  }
+
+  // ----------------------------------------------------
+  // TIMER, CONFETTI TRIGGER & MAIN RENDER LOOP
+  // ----------------------------------------------------
+  let isConfettiActive = false;
+  let confettiTimer = null;
+  let confettiInterval = null;
+  let secondsLeft = 0;
+
+  const confettiBtn = document.getElementById('confetti-trigger-btn');
+  const btnText = document.getElementById('confetti-btn-text');
+
+  function startConfetti(){
+    isConfettiActive = true;
+    secondsLeft = 20;
+    initThemeEffect();
+
+    if(confettiTimer) clearTimeout(confettiTimer);
+    if(confettiInterval) clearInterval(confettiInterval);
+
+    if(confettiBtn) confettiBtn.classList.add('active');
+    if(btnText) btnText.textContent = `Confetti (${secondsLeft}s)`;
+
+    confettiInterval = setInterval(()=>{
+      secondsLeft--;
+      if(secondsLeft > 0){
+        if(btnText) btnText.textContent = `Confetti (${secondsLeft}s)`;
+      } else {
+        clearInterval(confettiInterval);
+      }
+    }, 1000);
+
+    confettiTimer = setTimeout(()=>{
+      isConfettiActive = false;
+      if(confettiBtn) confettiBtn.classList.remove('active');
+      if(btnText) btnText.textContent = `Launch Confetti`;
+    }, 20000);
+  }
+
+  if(confettiBtn){
+    confettiBtn.addEventListener('click', startConfetti);
+  }
+
+  function initThemeEffect(){
+    const theme = getTheme();
+    if(theme === 'terminal') initTerminalScene();
+    else if(theme === 'origami') initOrigamiScene();
+    else if(theme === 'editorial') initEditorialScene();
+  }
+
+  function renderLoop(){
+    const theme = getTheme();
+    if(theme === 'terminal') drawTerminalScene();
+    else if(theme === 'origami') drawOrigamiScene();
+    else if(theme === 'editorial') drawEditorialScene();
+    else if(theme === 'retro') drawRetroWaves();
+    else ctx.clearRect(0, 0, w, h);
+
+    requestAnimationFrame(renderLoop);
+  }
+
+  const themeObserver = new MutationObserver(()=>{
+    const theme = getTheme();
+    if(theme === 'retro'){
+      if(confettiBtn) confettiBtn.style.display = 'none';
+    } else if(theme !== 'canvas'){
+      if(confettiBtn) confettiBtn.style.display = 'flex';
+    }
+    initThemeEffect();
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'data-mode'] });
+
+  initThemeEffect();
+  renderLoop();
+})();
+
+/* ===================== SKILLS PHYSICS (Matter.js) ===================== */
+(function(){
+  const wrap = document.getElementById('skills-canvas-wrap');
+  if(!wrap) return;
+  const { Engine, Render, Runner, World, Bodies, Mouse, MouseConstraint, Common } = Matter;
+  const engine = Engine.create(); engine.gravity.y = 0.6;
+  const w = wrap.clientWidth || 600, h = wrap.clientHeight || 480;
+  const render = Render.create({
+    element: wrap, engine, options:{ width:w, height:h, pixelRatio:1, wireframes:false, background:'transparent' }
+  });
+  render.canvas.style.width = '100%';
+  render.canvas.style.height = '100%';
+
+  const skills = ['Python','JavaScript','React.js','Node.js','SQL','C++','Firebase','Supabase','Gemini API','OpenAI API','Prompt Eng.','Git'];
+  const colors = ['#39ff6a','#ff2fa0','#ff6b35','#2f4af5','#22e5ff','#ffcc33'];
+  const bodies = skills.map((s,i)=>{
+    const tw = 70 + s.length*6.2;
+    const b = Bodies.rectangle(60+Math.random()*(w-120), -50-i*60, tw, 40, {
+      chamfer:{radius:20}, restitution:0.5, friction:0.15,
+      render:{ fillStyle: colors[i%colors.length] }
+    });
+    b.label = s; b._tw = tw;
+    return b;
+  });
+  const ground = Bodies.rectangle(w/2, h+20, w+40, 40, {isStatic:true, render:{visible:false}});
+  const leftWall = Bodies.rectangle(-20,h/2,40,h*2,{isStatic:true, render:{visible:false}});
+  const rightWall = Bodies.rectangle(w+20,h/2,40,h*2,{isStatic:true, render:{visible:false}});
+  World.add(engine.world, [...bodies, ground, leftWall, rightWall]);
+
+  const mouse = Mouse.create(render.canvas);
+  mouse.pixelRatio = 1;
+  const mouseConstraint = MouseConstraint.create(engine, { mouse, constraint:{ stiffness:.2, render:{visible:false} } });
+  World.add(engine.world, mouseConstraint);
+  render.mouse = mouse;
+
+  // Exact coordinate translation for canvas mode & high DPI displays
+  const updateMousePos = (e)=>{
+    const rect = render.canvas.getBoundingClientRect();
+    if(rect.width > 0 && rect.height > 0){
+      mouse.position.x = (e.clientX - rect.left) * (render.canvas.width / rect.width);
+      mouse.position.y = (e.clientY - rect.top) * (render.canvas.height / rect.height);
+    }
+  };
+  render.canvas.addEventListener('mousedown', updateMousePos, true);
+  render.canvas.addEventListener('mousemove', updateMousePos, true);
+  if('ontouchstart' in window){
+    render.canvas.addEventListener('touchstart', (e)=>{ if(e.touches.length > 0) updateMousePos(e.touches[0]); }, true);
+    render.canvas.addEventListener('touchmove', (e)=>{ if(e.touches.length > 0) updateMousePos(e.touches[0]); }, true);
+  }
+
+  Render.run(render);
+  const runner = Runner.create();
+  Runner.run(runner, engine);
+
+  // draw labels on top of bodies
+  Matter.Events.on(render, 'afterRender', ()=>{
+    const ctx = render.context;
+    ctx.font = '600 13px var(--font-body), sans-serif';
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg') || '#111';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    bodies.forEach(b=>{
+      ctx.save();
+      ctx.translate(b.position.x, b.position.y);
+      ctx.rotate(b.angle);
+      ctx.fillText(b.label, 0, 1);
+      ctx.restore();
+    });
+  });
+
+  // reset button logic
+  const resetBtn = document.getElementById('reset-skills-btn');
+  if(resetBtn){
+    resetBtn.addEventListener('click', ()=>{
+      const currentW = wrap.clientWidth || 600;
+      bodies.forEach((b, i)=>{
+        Matter.Body.setPosition(b, { x: 60 + Math.random() * (currentW - 120), y: -50 - i * 60 });
+        Matter.Body.setAngle(b, 0);
+        Matter.Body.setVelocity(b, { x: 0, y: 0 });
+        Matter.Body.setAngularVelocity(b, 0);
+      });
+      if(typeof playTick === 'function') playTick();
+    });
+  }
+
+  window.addEventListener('resize', Common.debounce ? Common.debounce(()=>{}, 200) : ()=>{});
+})();
+
+/* ===================== INFINITE SPATIAL CANVAS CONTROLLER ===================== */
+(function(){
+  const world = document.getElementById('canvas-world');
+  const svg = document.getElementById('canvas-svg');
+  
+  let targetX = 0, targetY = 200, targetZoom = 0.85;
+  let currentX = 0, currentY = 200, currentZoom = 0.85;
+  let isDragging = false, startMouseX = 0, startMouseY = 0, startPanX = 0, startPanY = 0;
+
+  function isCanvasMode(){
+    return document.documentElement.getAttribute('data-theme') === 'canvas';
+  }
+
+  const nodeCoords = {
+    hero: { x: 0, y: 0, zoom: 0.95 },
+    about: { x: 720, y: -660, zoom: 0.95 },
+    skills: { x: -740, y: -680, zoom: 0.95 },
+    journey: { x: 720, y: -1830, zoom: 0.95 },
+    projects: { x: -750, y: -1870, zoom: 0.95 },
+    contact: { x: 0, y: -3300, zoom: 0.95 }
+  };
+
+  function updateTransform(){
+    if(!isCanvasMode()) {
+      if(world) world.style.transform = '';
+      return;
+    }
+
+    currentX += (targetX - currentX) * 0.16;
+    currentY += (targetY - currentY) * 0.16;
+    currentZoom += (targetZoom - currentZoom) * 0.16;
+
+    if(world){
+      world.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentZoom})`;
+    }
+
+    const gridBg = document.getElementById('gridBg');
+    if(gridBg){
+      gridBg.style.backgroundPosition = `${currentX}px ${currentY}px`;
+      gridBg.style.backgroundSize = `${44 * currentZoom}px ${44 * currentZoom}px`;
+    }
+
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+
+    requestAnimationFrame(updateTransform);
+  }
+
+  window.addEventListener('mousedown', (e)=>{
+    if(!isCanvasMode()) return;
+    if(e.target.closest('button, a, input, textarea, canvas, #theme-switcher, #mute-btn, nav')) return;
+    isDragging = true;
+    startMouseX = e.clientX;
+    startMouseY = e.clientY;
+    startPanX = targetX;
+    startPanY = targetY;
+  });
+
+  window.addEventListener('mousemove', (e)=>{
+    if(!isDragging || !isCanvasMode()) return;
+    const dx = e.clientX - startMouseX;
+    const dy = e.clientY - startMouseY;
+    targetX = startPanX + dx;
+    targetY = startPanY + dy;
+  });
+
+  window.addEventListener('mouseup', ()=> isDragging = false);
+
+  window.addEventListener('wheel', (e)=>{
+    if(!isCanvasMode()) return;
+    e.preventDefault();
+    const zoomFactor = e.deltaY < 0 ? 1.08 : 0.92;
+    targetZoom = Math.min(Math.max(targetZoom * zoomFactor, 0.3), 1.6);
+  }, { passive: false });
+
+  window.panToCanvasNode = function(nodeId){
+    if(!isCanvasMode()) return;
+    const target = nodeCoords[nodeId];
+    if(target){
+      targetX = target.x;
+      targetY = target.y;
+      if(target.zoom) targetZoom = target.zoom;
+      if(typeof playTick === 'function') playTick();
+    }
+  };
+
+  document.querySelectorAll('nav ul a, .btn[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e)=>{
+      if(!isCanvasMode()) return;
+      const targetId = link.getAttribute('href').replace('#', '');
+      if(nodeCoords[targetId]){
+        e.preventDefault();
+        window.panToCanvasNode(targetId);
+      }
+    });
+  });
+
+  const zoomInBtn = document.getElementById('canvas-zoom-in');
+  const zoomOutBtn = document.getElementById('canvas-zoom-out');
+  const resetCamBtn = document.getElementById('canvas-reset');
+
+  if(zoomInBtn) zoomInBtn.addEventListener('click', ()=> targetZoom = Math.min(targetZoom * 1.25, 1.6));
+  if(zoomOutBtn) zoomOutBtn.addEventListener('click', ()=> targetZoom = Math.max(targetZoom / 1.25, 0.3));
+  if(resetCamBtn) resetCamBtn.addEventListener('click', ()=> window.panToCanvasNode('hero'));
+
+  function drawCanvasConnections(){
+    if(!svg || !isCanvasMode()) return;
+    const connections = [
+      ['hero', 'about'],
+      ['hero', 'skills'],
+      ['about', 'journey'],
+      ['skills', 'projects'],
+      ['journey', 'contact'],
+      ['projects', 'contact']
+    ];
+
+    let pathsHtml = '';
+    const offset = 4000;
+
+    connections.forEach(([fromId, toId]) => {
+      const fromEl = document.getElementById(fromId);
+      const toEl = document.getElementById(toId);
+      if(fromEl && toEl){
+        const fromRect = {
+          x: parseFloat(getComputedStyle(fromEl).left) || 0,
+          y: parseFloat(getComputedStyle(fromEl).top) || 0,
+          w: fromEl.offsetWidth,
+          h: fromEl.offsetHeight
+        };
+        const toRect = {
+          x: parseFloat(getComputedStyle(toEl).left) || 0,
+          y: parseFloat(getComputedStyle(toEl).top) || 0,
+          w: toEl.offsetWidth,
+          h: toEl.offsetHeight
+        };
+
+        const x1 = fromRect.x + fromRect.w / 2 + offset;
+        const y1 = fromRect.y + fromRect.h / 2 + offset;
+        const x2 = toRect.x + toRect.w / 2 + offset;
+        const y2 = toRect.y + toRect.h / 2 + offset;
+
+        const cy1 = y1 + (y2 - y1) * 0.5;
+        const cy2 = y1 + (y2 - y1) * 0.5;
+
+        pathsHtml += `<path d="M ${x1} ${y1} C ${x1} ${cy1}, ${x2} ${cy2}, ${x2} ${y2}" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="6,6" fill="none" opacity="0.5"/>`;
+      }
+    });
+
+    svg.innerHTML = pathsHtml;
+  }
+
+  const themeObserver = new MutationObserver(()=>{
+    if(isCanvasMode()){
+      targetX = 0; targetY = 200; targetZoom = 0.85;
+      currentX = 0; currentY = 200; currentZoom = 0.85;
+      setTimeout(drawCanvasConnections, 100);
+      updateTransform();
+    } else {
+      if(world) world.style.transform = '';
+      const gridBg = document.getElementById('gridBg');
+      if(gridBg){
+        gridBg.style.backgroundPosition = '';
+        gridBg.style.backgroundSize = '';
+      }
+    }
+  });
+
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  if(isCanvasMode()){
+    setTimeout(drawCanvasConnections, 100);
+    updateTransform();
+  }
+})();
+
+/* ===================== 3D ORIGAMI MEMORY MATCH MINI-GAME ENGINE ===================== */
+(function(){
+  const grid = document.getElementById('origami-game-grid');
+  const resetBtn = document.getElementById('origami-reset-btn');
+  const scoreEl = document.getElementById('origami-score');
+  const movesEl = document.getElementById('origami-moves');
+  if(!grid) return;
+
+  const origamiPairsData = [
+    { name: 'Python', icon: '🐍', desc: 'AI & Backend' },
+    { name: 'Python', icon: '🐍', desc: 'AI & Backend' },
+    { name: 'JavaScript', icon: '⚡', desc: 'Fullstack Web' },
+    { name: 'JavaScript', icon: '⚡', desc: 'Fullstack Web' },
+    { name: 'React.js', icon: '⚛️', desc: 'Web Architecture' },
+    { name: 'React.js', icon: '⚛️', desc: 'Web Architecture' },
+    { name: 'Firebase', icon: '🔥', desc: 'Cloud Auth & DB' },
+    { name: 'Firebase', icon: '🔥', desc: 'Cloud Auth & DB' },
+    { name: 'Gemini API', icon: '✨', desc: 'GenAI Multimodal' },
+    { name: 'Gemini API', icon: '✨', desc: 'GenAI Multimodal' },
+    { name: 'OpenAI API', icon: '🤖', desc: 'LLMs & AI Tools' },
+    { name: 'OpenAI API', icon: '🤖', desc: 'LLMs & AI Tools' }
+  ];
+
+  let flippedCards = [];
+  let matchedCount = 0;
+  let movesCount = 0;
+  let isLock = false;
+
+  function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function initOrigamiGame(){
+    flippedCards = [];
+    matchedCount = 0;
+    movesCount = 0;
+    isLock = false;
+    if(scoreEl) scoreEl.textContent = '0 / 6';
+    if(movesEl) movesEl.textContent = '0';
+
+    const shuffled = shuffle(origamiPairsData);
+    grid.innerHTML = '';
+
+    shuffled.forEach((item) => {
+      const card = document.createElement('div');
+      card.className = 'origami-card';
+      card.dataset.name = item.name;
+
+      card.innerHTML = `
+        <div class="origami-wrapper">
+          <div class="origami-face origami-front"><span class="origami-icon">📐</span></div>
+          <div class="origami-face origami-inside">
+            <span class="origami-badge">${item.icon} UNFOLDED</span>
+            <h3 class="origami-skill-name">${item.name}</h3>
+            <span class="origami-level">${item.desc}</span>
+          </div>
+        </div>
+      `;
+
+      card.addEventListener('click', ()=> handleCardClick(card));
+      grid.appendChild(card);
+    });
+  }
+
+  function handleCardClick(card){
+    if(isLock || card.classList.contains('unfolded') || card.classList.contains('matched')) return;
+
+    card.classList.add('unfolded');
+    flippedCards.push(card);
+    if(typeof playTick === 'function') playTick();
+
+    if(flippedCards.length === 2){
+      movesCount++;
+      if(movesEl) movesEl.textContent = movesCount;
+
+      const [card1, card2] = flippedCards;
+      if(card1.dataset.name === card2.dataset.name){
+        // Match found!
+        card1.classList.add('matched');
+        card2.classList.add('matched');
+        flippedCards = [];
+        matchedCount++;
+        if(scoreEl) scoreEl.textContent = `${matchedCount} / 6`;
+
+        if(matchedCount === 6){
+          setTimeout(()=>{
+            alert(`🎉 Congratulations! You solved the Origami Memory Game in ${movesCount} moves!`);
+          }, 400);
+        }
+      } else {
+        // Not similar - turn back!
+        isLock = true;
+        setTimeout(()=>{
+          card1.classList.remove('unfolded');
+          card2.classList.remove('unfolded');
+          flippedCards = [];
+          isLock = false;
+        }, 850);
+      }
+    }
+  }
+
+  if(resetBtn){
+    resetBtn.addEventListener('click', ()=>{
+      initOrigamiGame();
+      if(typeof playTick === 'function') playTick();
+    });
+  }
+
+  initOrigamiGame();
+})();
+
+/* ===================== HERO TYPEWRITER ENGINE ===================== */
+(function(){
+  const roles = [
+    "Software Developer",
+    "AI Enthusiast",
+    "Future Innovator",
+    "Problem Solver"
+  ];
+  const typewriterEl = document.getElementById('hero-typewriter');
+  if(!typewriterEl) return;
+
+  let roleIdx = 0;
+  let charIdx = 0;
+  let isDeleting = false;
+  let typingSpeed = 90;
+
+  function typeStep(){
+    const currentRole = roles[roleIdx];
+
+    if(isDeleting){
+      charIdx--;
+      typingSpeed = 40;
+    } else {
+      charIdx++;
+      typingSpeed = 90;
+    }
+
+    typewriterEl.textContent = currentRole.substring(0, charIdx);
+
+    if(!isDeleting && charIdx === currentRole.length){
+      typingSpeed = 2200;
+      isDeleting = true;
+    } else if(isDeleting && charIdx === 0){
+      isDeleting = false;
+      roleIdx = (roleIdx + 1) % roles.length;
+      typingSpeed = 400;
+    }
+
+    setTimeout(typeStep, typingSpeed);
+  }
+
+  typeStep();
+})();
+
+/* ===================== GAME 1: TERMINAL TYPING RACE (HACK THE STACK) ===================== */
+(function(){
+  const cmds = [
+    "compile react.js",
+    "run python.py",
+    "deploy firebase",
+    "query sql-db",
+    "build node.js",
+    "train gemini-ai",
+    "prompt openai-api",
+    "git push origin main"
+  ];
+  const targetEl = document.getElementById('term-target-cmd');
+  const inputEl = document.getElementById('term-input');
+  const scoreEl = document.getElementById('term-score');
+  const streakEl = document.getElementById('term-streak');
+  const livesEl = document.getElementById('term-lives');
+  const startBtn = document.getElementById('term-start-btn');
+  const stopBtn = document.getElementById('term-stop-btn');
+  const progressEl = document.getElementById('term-timer-progress');
+  if(!targetEl || !inputEl) return;
+
+  let score = 0, streak = 0, lives = 3, currentCmd = '', timerInterval = null, timeLeft = 100, isGameOver = false, gameActive = false;
+
+  // Set default disabled state
+  inputEl.disabled = true;
+  inputEl.placeholder = "Click 'Start Game' to type...";
+  targetEl.textContent = "[CLICK START TO PLAY]";
+
+  function renderLives(){
+    if(!livesEl) return;
+    let hearts = '';
+    for(let i = 0; i < 3; i++){
+      hearts += i < lives ? '❤️ ' : '🖤 ';
+    }
+    livesEl.textContent = hearts.trim();
+  }
+
+  function stopTerminalGame(){
+    if(timerInterval) clearInterval(timerInterval);
+    timerInterval = null;
+  }
+  window.stopTerminalGame = stopTerminalGame;
+
+  function terminateTerminalGame(){
+    if(!gameActive) return;
+    stopTerminalGame();
+    gameActive = false;
+    inputEl.disabled = true;
+    inputEl.placeholder = "Click 'Start Game' to type...";
+    inputEl.value = '';
+    targetEl.textContent = "[CLICK START TO PLAY]";
+    if(progressEl) progressEl.style.width = '0%';
+    alert('👾 HACK TERMINATED! Final Score: ' + score);
+  }
+  window.terminateTerminalGame = terminateTerminalGame;
+
+  if(startBtn){
+    startBtn.addEventListener('click', ()=>{
+      score = 0; streak = 0; lives = 3; isGameOver = false;
+      gameActive = true;
+      inputEl.disabled = false;
+      inputEl.placeholder = "type command here...";
+      if(scoreEl) scoreEl.textContent = '0000';
+      if(streakEl) streakEl.textContent = '0x';
+      renderLives();
+      nextCommand();
+      inputEl.focus();
+      if(typeof playTick === 'function') playTick();
+    });
+  }
+
+  if(stopBtn){
+    stopBtn.addEventListener('click', ()=>{
+      terminateTerminalGame();
+      if(typeof playTick === 'function') playTick();
+    });
+  }
+
+  function startTimer(){
+    stopTerminalGame();
+    if(isGameOver || !gameActive) return;
+    timerInterval = setInterval(()=>{
+      timeLeft -= 2.5;
+      if(progressEl) progressEl.style.width = Math.max(0, timeLeft) + '%';
+      if(timeLeft <= 0){
+        stopTerminalGame();
+        streak = 0;
+        if(streakEl) streakEl.textContent = '0x';
+        lives--;
+        renderLives();
+
+        if(lives <= 0){
+          isGameOver = true;
+          gameActive = false;
+          inputEl.disabled = true;
+          targetEl.textContent = '[HACK OVER - CLICK START TO REPLAY]';
+          inputEl.value = '';
+          inputEl.placeholder = "Click 'Start Game' to type...";
+          alert('👾 HACK OVER! You ran out of lives. Final Score: ' + score);
+        } else {
+          nextCommand();
+        }
+      }
+    }, 150);
+  }
+
+  function nextCommand(){
+    if(isGameOver || !gameActive) return;
+    currentCmd = cmds[Math.floor(Math.random() * cmds.length)];
+    targetEl.textContent = currentCmd;
+    inputEl.value = '';
+    timeLeft = 100;
+    if(progressEl) progressEl.style.width = '100%';
+    startTimer();
+  }
+
+  inputEl.addEventListener('input', ()=>{
+    if(!gameActive || isGameOver) return;
+    if(inputEl.value.trim().toLowerCase() === currentCmd.toLowerCase()){
+      score += 100 + streak * 25;
+      streak++;
+      if(scoreEl) scoreEl.textContent = score.toString().padStart(4, '0');
+      if(streakEl) streakEl.textContent = streak + 'x';
+      nextCommand();
+    }
+  });
+
+  renderLives();
+})();
+
+/* ===================== GAME 2: RETRO CRT BREAKOUT ARCADE ===================== */
+(function(){
+  const canvas = document.getElementById('retro-breakout-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const startBtn = document.getElementById('retro-start-btn');
+  const pauseBtn = document.getElementById('retro-pause-btn');
+  const scoreEl = document.getElementById('retro-score');
+  const livesEl = document.getElementById('retro-lives');
+
+  let score = 0, lives = 3, gameRunning = false;
+  let ball = { x: 340, y: 300, vx: 4, vy: -4, r: 7 };
+  let paddle = { x: 290, w: 100, h: 12 };
+  let bricks = [];
+
+  const skills = ['Python', 'JS', 'React', 'Firebase', 'Gemini', 'OpenAI', 'C++', 'SQL', 'Node', 'Git'];
+  const colors = ['#ff2fa0', '#22e5ff', '#ffcc33', '#39ff6a', '#ff6b35'];
+
+  function stopRetroGame(){
+    gameRunning = false;
+    if(pauseBtn) pauseBtn.textContent = '▶ Resume Game';
+  }
+  window.stopRetroGame = stopRetroGame;
+
+  function initBricks(){
+    bricks = [];
+    const rows = 2, cols = 5;
+    const bW = 118, bH = 30, padding = 12, offsetTop = 40, offsetLeft = 20;
+
+    for(let r = 0; r < rows; r++){
+      for(let c = 0; c < cols; c++){
+        const idx = r * cols + c;
+        bricks.push({
+          x: offsetLeft + c * (bW + padding),
+          y: offsetTop + r * (bH + padding),
+          w: bW, h: bH,
+          text: skills[idx % skills.length],
+          color: colors[idx % colors.length],
+          alive: true
+        });
+      }
+    }
+  }
+
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    paddle.x = e.clientX - rect.left - paddle.w / 2;
+    if(paddle.x < 0) paddle.x = 0;
+    if(paddle.x + paddle.w > canvas.width) paddle.x = canvas.width - paddle.w;
+  });
+
+  function updateGame(){
+    if(!gameRunning) return;
+
+    ball.x += ball.vx;
+    ball.y += ball.vy;
+
+    if(ball.x - ball.r < 0 || ball.x + ball.r > canvas.width) ball.vx = -ball.vx;
+    if(ball.y - ball.r < 0) ball.vy = -ball.vy;
+
+    if(ball.y + ball.r >= canvas.height - paddle.h - 10 && ball.y + ball.r <= canvas.height - 10){
+      if(ball.x >= paddle.x && ball.x <= paddle.x + paddle.w){
+        ball.vy = -Math.abs(ball.vy);
+        ball.vx = (ball.x - (paddle.x + paddle.w / 2)) * 0.12;
+      }
+    }
+
+    if(ball.y > canvas.height){
+      lives--;
+      if(livesEl) livesEl.textContent = lives;
+      if(lives <= 0){
+        stopRetroGame();
+        alert('👾 GAME OVER! Score: ' + score);
+      } else {
+        ball.x = 340; ball.y = 280; ball.vy = -4;
+      }
+    }
+
+    bricks.forEach(b => {
+      if(b.alive){
+        if(ball.x > b.x && ball.x < b.x + b.w && ball.y - ball.r < b.y + b.h && ball.y + ball.r > b.y){
+          b.alive = false;
+          ball.vy = -ball.vy;
+          score += 150;
+          if(scoreEl) scoreEl.textContent = score.toString().padStart(4, '0');
+        }
+      }
+    });
+  }
+
+  function drawGame(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Paddle
+    ctx.fillStyle = '#ff2fa0';
+    ctx.shadowColor = '#ff2fa0';
+    ctx.shadowBlur = 10;
+    ctx.fillRect(paddle.x, canvas.height - 20, paddle.w, paddle.h);
+
+    // Ball
+    ctx.fillStyle = '#22e5ff';
+    ctx.shadowColor = '#22e5ff';
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    // Bricks
+    bricks.forEach(b => {
+      if(b.alive){
+        ctx.fillStyle = b.color;
+        ctx.fillRect(b.x, b.y, b.w, b.h);
+        ctx.fillStyle = '#0d0614';
+        ctx.font = '700 12px "JetBrains Mono", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText(b.text, b.x + b.w / 2, b.y + 19);
+      }
+    });
+
+    updateGame();
+    if(gameRunning){
+      requestAnimationFrame(drawGame);
+    }
+  }
+
+  if(startBtn){
+    startBtn.addEventListener('click', ()=>{
+      score = 0; lives = 3; gameRunning = true;
+      if(pauseBtn) pauseBtn.textContent = '⏸ Pause Game';
+      if(scoreEl) scoreEl.textContent = '0000';
+      if(livesEl) livesEl.textContent = '3';
+      ball.x = 340; ball.y = 280; ball.vy = -4;
+      initBricks();
+      requestAnimationFrame(drawGame);
+    });
+  }
+
+  if(pauseBtn){
+    pauseBtn.addEventListener('click', ()=>{
+      if(gameRunning){
+        stopRetroGame();
+      } else {
+        if(lives <= 0){
+          score = 0; lives = 3;
+          if(scoreEl) scoreEl.textContent = '0000';
+          if(livesEl) livesEl.textContent = '3';
+          ball.x = 340; ball.y = 280; ball.vy = -4;
+          initBricks();
+        }
+        gameRunning = true;
+        pauseBtn.textContent = '⏸ Pause Game';
+        requestAnimationFrame(drawGame);
+      }
+    });
+  }
+
+  initBricks();
+  drawGame();
+})();
+
+/* ===================== GAME 3: INFINITE CANVAS CONSTELLATION MAP ===================== */
+(function(){
+  const svg = document.getElementById('constellation-svg');
+  const nodes = document.querySelectorAll('.c-node');
+  const resetBtn = document.getElementById('constellation-reset-btn');
+  if(!svg || !nodes.length) return;
+
+  let selectedNode = null;
+  let connections = [];
+
+  nodes.forEach(node => {
+    node.addEventListener('click', ()=>{
+      if(!selectedNode){
+        selectedNode = node;
+        node.classList.add('selected');
+      } else if(selectedNode === node){
+        node.classList.remove('selected');
+        selectedNode = null;
+      } else {
+        // Draw SVG constellation line between selectedNode & node
+        const r1 = selectedNode.getBoundingClientRect();
+        const r2 = node.getBoundingClientRect();
+        const boardR = svg.parentElement.getBoundingClientRect();
+
+        const x1 = r1.left + r1.width/2 - boardR.left;
+        const y1 = r1.top + r1.height/2 - boardR.top;
+        const x2 = r2.left + r2.width/2 - boardR.left;
+        const y2 = r2.top + r2.height/2 - boardR.top;
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+        line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+        line.setAttribute('stroke', '#39ff6a');
+        line.setAttribute('stroke-width', '2');
+        line.setAttribute('stroke-dasharray', '4 4');
+        svg.appendChild(line);
+
+        selectedNode.classList.remove('selected');
+        selectedNode = null;
+      }
+    });
+  });
+
+  if(resetBtn){
+    resetBtn.addEventListener('click', ()=>{
+      svg.innerHTML = '';
+      nodes.forEach(n => n.classList.remove('selected'));
+      selectedNode = null;
+    });
+  }
+})();
+
+/* ===================== GAME 4: EDITORIAL MANUSCRIPT PROOFREADING ===================== */
+(function(){
+  const passages = [
+    {
+      tag: "DRAFT REVISION #01 · CORE BIO",
+      words: [
+        { text: "I", isErr: false },
+        { text: "am", isErr: false },
+        { text: "a", isErr: false },
+        { text: "Sotware", isErr: true },
+        { text: "Developer", isErr: false },
+        { text: "building", isErr: false },
+        { text: "AI-powered", isErr: false },
+        { text: "products", isErr: false },
+        { text: "with", isErr: false },
+        { text: "Pythen,", isErr: true },
+        { text: "Reack.js,", isErr: true },
+        { text: "and", isErr: false },
+        { text: "Firbase.", isErr: true },
+        { text: "Exploring", isErr: false },
+        { text: "Gemmi", isErr: true },
+        { text: "API", isErr: false },
+        { text: "to", isErr: false },
+        { text: "ship", isErr: false },
+        { text: "meaningful", isErr: false },
+        { text: "software.", isErr: false }
+      ]
+    },
+    {
+      tag: "DRAFT REVISION #02 · BACKEND & DATA",
+      words: [
+        { text: "Engineering", isErr: false },
+        { text: "scalable", isErr: false },
+        { text: "microservises", isErr: true },
+        { text: "using", isErr: false },
+        { text: "Node.js", isErr: false },
+        { text: "and", isErr: false },
+        { text: "Supabese.", isErr: true },
+        { text: "Writing", isErr: false },
+        { text: "optimised", isErr: false },
+        { text: "SQL", isErr: false },
+        { text: "queris", isErr: true },
+        { text: "and", isErr: false },
+        { text: "promt", isErr: true },
+        { text: "enginering", isErr: true },
+        { text: "pipelines.", isErr: false }
+      ]
+    },
+    {
+      tag: "DRAFT REVISION #03 · INNOVATION & COMMUNITY",
+      words: [
+        { text: "Participateing", isErr: true },
+        { text: "in", isErr: false },
+        { text: "Google", isErr: false },
+        { text: "Developer", isErr: false },
+        { text: "hackathons,", isErr: false },
+        { text: "turning", isErr: false },
+        { text: "complex", isErr: false },
+        { text: "ideass", isErr: true },
+        { text: "into", isErr: false },
+        { text: "working", isErr: false },
+        { text: "prototipes.", isErr: true },
+        { text: "Pasionate", isErr: true },
+        { text: "about", isErr: false },
+        { text: "creatting", isErr: true },
+        { text: "intuitive", isErr: false },
+        { text: "experiences.", isErr: false }
+      ]
+    }
+  ];
+
+  const bodyEl = document.getElementById('manuscript-text-body');
+  const tagEl = document.getElementById('manuscript-tag-header');
+  const redPenToggle = document.getElementById('red-pen-toggle-btn');
+  const scoreEl = document.getElementById('ed-found-score');
+  const timerEl = document.getElementById('ed-timer');
+  const resetBtn = document.getElementById('editorial-reset-btn');
+  const edStartBtn = document.getElementById('ed-start-btn');
+  const edStopBtn = document.getElementById('ed-stop-btn');
+  
+  if(!bodyEl) return;
+
+  let passageIdx = 0, foundCount = 0, totalErrs = 5, timeLeft = 25, gameTimer = null, isRedPenActive = true, gameActive = false;
+
+  // Set default state on load
+  bodyEl.textContent = "[CLICK START TO PLAY]";
+
+  function stopEditorialGame(){
+    if(gameTimer) clearInterval(gameTimer);
+    gameTimer = null;
+  }
+  window.stopEditorialGame = stopEditorialGame;
+
+  function terminateEditorialGame(){
+    if(!gameActive) return;
+    stopEditorialGame();
+    gameActive = false;
+    bodyEl.textContent = "[CLICK START TO PLAY]";
+    updateRedPenUI();
+    alert(`✍️ PROOFREADING INTERRUPTED! You found ${foundCount} out of ${totalErrs} typos.`);
+  }
+  window.terminateEditorialGame = terminateEditorialGame;
+
+  function updateRedPenUI(){
+    if(!redPenToggle) return;
+    if(isRedPenActive && gameActive){
+      redPenToggle.textContent = '🖊️ RED PEN ACTIVE';
+      redPenToggle.style.color = '#dc2626';
+      redPenToggle.style.opacity = '1';
+      if(bodyEl) bodyEl.style.pointerEvents = 'auto';
+    } else {
+      redPenToggle.textContent = '🖊️ RED PEN PAUSED';
+      redPenToggle.style.color = '#78716c';
+      redPenToggle.style.opacity = '0.6';
+      if(bodyEl) bodyEl.style.pointerEvents = 'none';
+    }
+  }
+
+  if(redPenToggle){
+    redPenToggle.addEventListener('click', ()=>{
+      if(!gameActive) return;
+      isRedPenActive = !isRedPenActive;
+      updateRedPenUI();
+
+      if(!isRedPenActive){
+        stopEditorialGame();
+      } else {
+        startTimer();
+      }
+    });
+  }
+
+  if(edStartBtn){
+    edStartBtn.addEventListener('click', ()=>{
+      gameActive = true;
+      initProofreadGame();
+      if(typeof playTick === 'function') playTick();
+    });
+  }
+
+  if(edStopBtn){
+    edStopBtn.addEventListener('click', ()=>{
+      terminateEditorialGame();
+      if(typeof playTick === 'function') playTick();
+    });
+  }
+
+  function startTimer(){
+    stopEditorialGame();
+    if(!isRedPenActive || !gameActive) return;
+    gameTimer = setInterval(()=>{
+      timeLeft--;
+      if(timerEl) timerEl.textContent = `${timeLeft}s`;
+      if(timeLeft <= 0){
+        stopEditorialGame();
+        gameActive = false;
+        bodyEl.textContent = "[CLICK START TO PLAY]";
+        updateRedPenUI();
+        alert('⌛ TIME EXPIRED! Try again to spot all manuscript typos.');
+      }
+    }, 1000);
+  }
+
+  function initProofreadGame(){
+    if(!gameActive) return;
+    foundCount = 0;
+    timeLeft = 25;
+    isRedPenActive = true;
+    updateRedPenUI();
+    bodyEl.innerHTML = '';
+
+    const p = passages[passageIdx];
+    if(tagEl) tagEl.textContent = p.tag;
+
+    totalErrs = p.words.filter(w => w.isErr).length;
+
+    if(scoreEl) scoreEl.textContent = `0 / ${totalErrs}`;
+    if(timerEl) timerEl.textContent = `25s`;
+
+    p.words.forEach((item, idx) => {
+      const span = document.createElement('span');
+      span.className = 'manuscript-word';
+      span.textContent = item.text;
+      span.dataset.idx = idx;
+
+      span.addEventListener('click', ()=>{
+        if(!isRedPenActive || !gameActive) return;
+        if(item.isErr){
+          if(!span.classList.contains('corrected')){
+            span.classList.add('corrected');
+            foundCount++;
+            if(scoreEl) scoreEl.textContent = `${foundCount} / ${totalErrs}`;
+            if(typeof playTick === 'function') playTick();
+
+            if(foundCount === totalErrs){
+              stopEditorialGame();
+              gameActive = false;
+              setTimeout(()=>{
+                alert(`🎉 PROOFREADING APPROVED! You spotted all ${totalErrs} manuscript typos! Click 'New Proofread Draft' and start to play again.`);
+              }, 200);
+            }
+          }
+        } else {
+          span.style.color = '#78716c';
+          setTimeout(()=> span.style.color = '#292524', 400);
+        }
+      });
+
+      bodyEl.appendChild(span);
+      bodyEl.appendChild(document.createTextNode(' '));
+    });
+
+    startTimer();
+  }
+
+  if(resetBtn){
+    resetBtn.addEventListener('click', ()=>{
+      if(!gameActive) {
+        alert("Please click 'Start Game' first!");
+        return;
+      }
+      passageIdx = (passageIdx + 1) % passages.length;
+      initProofreadGame();
+      if(typeof playTick === 'function') playTick();
+    });
+  }
+})();
+
+/* Global helper to stop all active theme games when switching themes */
+window.stopAllActiveThemeGames = function(){
+  if(typeof window.terminateTerminalGame === 'function') window.terminateTerminalGame();
+  if(typeof window.terminateEditorialGame === 'function') window.terminateEditorialGame();
+};
+
+/* ===================== FEATURE 2: RESUME INTEGRATION ===================== */
+const resumeModal = document.getElementById('interactive-resume-modal');
+const resumeModalClose = document.getElementById('resume-modal-close');
+const resumeBackBtn = document.getElementById('resume-back-btn');
+const resumePrintBtn = document.getElementById('resume-print-btn');
+
+function openInteractiveResume() {
+  if (resumeModal) {
+    resumeModal.classList.add('open');
+    document.body.style.overflow = 'hidden'; // prevent scrolling behind resume
+  }
+}
+
+function closeInteractiveResume() {
+  if (resumeModal) {
+    resumeModal.classList.remove('open');
+    document.body.style.overflow = ''; // restore scrolling
+  }
+}
+
+if (resumeModalClose) resumeModalClose.addEventListener('click', closeInteractiveResume);
+if (resumeBackBtn) resumeBackBtn.addEventListener('click', closeInteractiveResume);
+if (resumePrintBtn) {
+  resumePrintBtn.addEventListener('click', () => {
+    window.print();
+  });
+}
+
+// Bind to all resume buttons across the site
+document.querySelectorAll('.nav-resume-btn, .hero-resume-btn, .contact-resume-btn, #view-resume-floating-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    if (e) e.preventDefault();
+    openInteractiveResume();
+  });
+});
+
+// Expose globally so other modules can trigger it
+window.openInteractiveResume = openInteractiveResume;
+
+/* ===================== FEATURE 1 & 3: DEV CONSOLE & THEMED CHATBOT ENGINE ===================== */
+(function(){
+  const dockBtn = document.getElementById('dev-terminal-dock-btn');
+  const windowEl = document.getElementById('dev-console-window');
+  const closeBtn = document.getElementById('dev-console-close');
+  const outputEl = document.getElementById('dev-console-output');
+  const inputEl = document.getElementById('dev-console-input');
+  if(!windowEl || !outputEl || !inputEl) return;
+
+  let cmdHistory = [];
+  let historyIdx = -1;
+  let isPrinting = false;
+
+  const overlayEl = document.getElementById('dev-console-overlay');
+
+  // Toggle Dev Console Window
+  if(dockBtn){
+    dockBtn.addEventListener('click', ()=>{
+      windowEl.classList.toggle('open');
+      if(overlayEl) overlayEl.classList.toggle('open', windowEl.classList.contains('open'));
+      if(windowEl.classList.contains('open')){
+        inputEl.focus();
+      }
+    });
+  }
+  if(closeBtn){
+    closeBtn.addEventListener('click', ()=>{
+      windowEl.classList.remove('open');
+      if(overlayEl) overlayEl.classList.remove('open');
+    });
+  }
+  if(overlayEl){
+    overlayEl.addEventListener('click', ()=>{
+      windowEl.classList.remove('open');
+      overlayEl.classList.remove('open');
+    });
+  }
+
+  // Typewriter Output System (~18ms per character)
+  function typeLine(text, className="ans", callback){
+    const line = document.createElement('div');
+    line.className = `console-line ${className}`;
+    outputEl.appendChild(line);
+
+    // Check reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReducedMotion){
+      line.innerHTML = text;
+      outputEl.scrollTop = outputEl.scrollHeight;
+      if(callback) callback();
+      return;
+    }
+
+    let i = 0;
+    isPrinting = true;
+    const interval = setInterval(()=>{
+      line.innerHTML = text.substring(0, i + 1);
+      outputEl.scrollTop = outputEl.scrollHeight;
+      i++;
+      if(i >= text.length){
+        clearInterval(interval);
+        isPrinting = false;
+        if(callback) callback();
+      }
+    }, 18);
+  }
+
+  // Print Instant Line
+  function printInstantLine(text, className="sys"){
+    const line = document.createElement('div');
+    line.className = `console-line ${className}`;
+    line.innerHTML = text;
+    outputEl.appendChild(line);
+    outputEl.scrollTop = outputEl.scrollHeight;
+  }
+
+  // Feature 3: Themed Chatbot Response Engine (Rule-based Intent Matching)
+  function handleChatbotQuery(query){
+    const q = query.toLowerCase().trim();
+    const activeTheme = document.documentElement.getAttribute('data-theme') || 'editorial';
+
+    // Canned Personality Responses
+    if(q.includes('hi') || q.includes('hello') || q.includes('hey') || q === 'sup'){
+      return "Hello! I'm Eswari's AI portfolio chatbot assistant. Ask me about her skills, projects, hackathons, or how to hire her!";
+    }
+    if(q.includes('who are you') || q.includes('identity')){
+      return "I'm Eswari's interactive portfolio agent! I can help you explore her tech stack, project live demos, and community achievements.";
+    }
+    if(q.includes('are you an ai') || q.includes('llm')){
+      return "I am a lightweight client-side knowledge assistant! (Note: a true LLM-powered backend proxy API can be attached in v2!).";
+    }
+    if(q.includes('thanks') || q.includes('thank you')){
+      return "You're welcome! Feel free to ask more questions or reach out directly at eswari.d2011@gmail.com.";
+    }
+
+    // Intent Keyword Matchers
+    if(q.includes('hire') || q.includes('job') || q.includes('intern') || q.includes('opportunity') || q.includes('role')){
+      return "Eswari is eager to collaborate on software development, AI projects, and engineering internships! Reach out directly at eswari.d2011@gmail.com or via LinkedIn: linkedin.com/in/eswari-dangeti.";
+    }
+    if(q.includes('skill') || q.includes('stack') || q.includes('python') || q.includes('react') || q.includes('ai') || q.includes('c++') || q.includes('sql')){
+      return "Eswari's technical skills include Python, JavaScript, C++, SQL, HTML/CSS, React.js, Node.js, SQLite, Firebase, Supabase, OpenAI & Google Gemini APIs, Prompt Engineering, Git, GitHub, and VS Code.";
+    }
+    if(q.includes('project') || q.includes('ideaforge') || q.includes('breakpoint') || q.includes('campusflow') || q.includes('app')){
+      return "Eswari has built 3 key projects: (1) IdeaForge AI (business idea viability analyzer), (2) Breakpoint Library (engineering failure knowledge exchange), and (3) CampusFlow (smart campus platform). Type 'projects' to view links!";
+    }
+    if(q.includes('education') || q.includes('degree') || q.includes('college') || q.includes('niat') || q.includes('school')){
+      return "Eswari is pursuing a Bachelor of Technology (B.Tech) in Computer Science Engineering at National Institute of Advanced Technology (NIAT), expected graduation in 2029.";
+    }
+    if(q.includes('journey') || q.includes('hackathon') || q.includes('google') || q.includes('community')){
+      return "Eswari is an active member of the Google Developer Community (2026-Present), regular hackathon participant, and presenter at technical ideation events.";
+    }
+    if(q.includes('contact') || q.includes('email') || q.includes('linkedin') || q.includes('github') || q.includes('location')){
+      return "Email: eswari.d2011@gmail.com | LinkedIn: linkedin.com/in/eswari-dangeti | GitHub: github.com/Eswaridangeti | Location: Andhra Pradesh, India.";
+    }
+
+    // Fallbacks in Voice of Active Theme
+    if(activeTheme === 'terminal'){
+      return "404: Command/Intent not parsed. Try 'ask projects', 'ask skills', or 'help'.";
+    } else if(activeTheme === 'retro'){
+      return "GLITCH! Syntax Error 404 — try asking about projects, skills, or resume!";
+    } else if(activeTheme === 'origami'){
+      return "Fold mismatch! Try asking about skills, projects, or contact.";
+    } else if(activeTheme === 'canvas'){
+      return "Node unlinked. Try asking about skills, projects, or education.";
+    } else {
+      return "I'm not sure I follow — ask me about my projects, skills, or how to reach me.";
+    }
+  }
+
+  // Feature 1: Command Parser & Processor
+  function processCommand(rawInput){
+    const trimmed = rawInput.trim();
+    if(!trimmed) return;
+
+    printInstantLine(`eswari@portfolio:~$ ${trimmed}`, "cmd-prompt");
+    cmdHistory.push(trimmed);
+    historyIdx = cmdHistory.length;
+
+    const lower = trimmed.toLowerCase();
+    const parts = lower.split(' ');
+    const cmd = parts[0];
+    const arg = parts.slice(1).join(' ');
+
+    if(cmd === 'clear'){
+      outputEl.innerHTML = '';
+      return;
+    }
+
+    if(cmd === 'help'){
+      typeLine("AVAILABLE COMMANDS:<br>• <strong>about</strong> - view professional bio<br>• <strong>skills</strong> - list technical stack &amp; tools<br>• <strong>projects</strong> - view project showcase &amp; links<br>• <strong>journey</strong> - view hackathons &amp; community timeline<br>• <strong>resume</strong> - view &amp; download PDF resume<br>• <strong>contact</strong> - view direct contact links<br>• <strong>ask &lt;topic&gt;</strong> - query AI chatbot assistant<br>• <strong>theme &lt;name&gt;</strong> - switch site theme (terminal, retro, canvas, editorial, origami)<br>• <strong>clear</strong> - clear console log");
+    }
+    else if(cmd === 'about'){
+      typeLine("ESWARI DANGETI — Second-year B.Tech CS engineering student at NIAT (graduating 2029). Passionate about building AI-powered platforms, web software, and product innovations that solve real-world problems.");
+    }
+    else if(cmd === 'skills'){
+      typeLine("TECHNICAL SKILLS:<br>• Languages: Python, JavaScript, C++, SQL<br>• Web: HTML, CSS, React.js, Node.js, REST APIs<br>• Databases: SQLite, Firebase, Supabase<br>• AI &amp; Tools: Generative AI, Prompt Engineering, OpenAI APIs, Google Gemini APIs, Git, GitHub, VS Code");
+    }
+    else if(cmd === 'projects'){
+      if(arg.includes('ideaforge')){
+        typeLine("💡 IdeaForge AI — AI-Powered Business Idea Viability Analyzer.<br>Evaluates feasibility, market demand, scalability, and risk factors with investor simulation.<br>Live Demo: https://ideaforge-ai.vercel.app");
+      } else if(arg.includes('breakpoint')){
+        typeLine("🛠️ Breakpoint Library — Engineering Failure Knowledge Exchange Platform.<br>Centralized knowledge base for documenting and sharing engineering project failures.<br>Live Demo: https://breakpointlibrary.netlify.app/");
+      } else if(arg.includes('campusflow')){
+        typeLine("🏫 CampusFlow — Smart Campus Management Platform.<br>Streamlines student activities, faculty communication, and campus operations.<br>Live Demo: https://campusflow.base44.app");
+      } else {
+        typeLine("FEATURED PROJECTS:<br>1. 💡 IdeaForge AI (Idea Viability Analyzer)<br>2. 🛠️ Breakpoint Library (Failure Exchange Platform)<br>3. 🏫 CampusFlow (Smart Campus Management)<br><em>Type 'projects ideaforge', 'projects breakpoint', or 'projects campusflow' for deep dives!</em>");
+      }
+    }
+    else if(cmd === 'journey'){
+      typeLine("COMMUNITY &amp; HACKATHON TIMELINE:<br>• Google Developer Community Member (2026–Present)<br>• Active Hackathon &amp; Innovation Challenge Participant<br>• Presented technical projects in ideation competitions");
+    }
+    else if(cmd === 'resume'){
+      typeLine("📄 Opening Eswari Dangeti's interactive resume modal...", "ans", ()=>{
+        openInteractiveResume();
+      });
+    }
+    else if(cmd === 'contact'){
+      typeLine("CONTACT INFORMATION:<br>• Email: eswari.d2011@gmail.com<br>• LinkedIn: linkedin.com/in/eswari-dangeti<br>• GitHub: github.com/Eswaridangeti<br>• Location: Andhra Pradesh, India");
+    }
+    else if(cmd === 'theme'){
+      const validThemes = ['terminal', 'retro', 'canvas', 'editorial', 'origami'];
+      if(validThemes.includes(arg)){
+        root.setAttribute('data-theme', arg);
+        themeBtns.forEach(b => b.classList.toggle('active', b.dataset.theme === arg));
+        if(typeof updateSkillsHeading === 'function') updateSkillsHeading();
+        if(typeof window.stopAllActiveThemeGames === 'function') window.stopAllActiveThemeGames();
+        typeLine(`🎨 Theme switched to '${arg}'!`);
+      } else {
+        typeLine(`Invalid theme '${arg}'. Valid options: terminal, retro, canvas, editorial, origami`, "err");
+      }
+    }
+    else if(cmd === 'ask'){
+      if(!arg){
+        typeLine("Please specify a topic! Example: 'ask skills', 'ask projects', 'ask hire'", "sys");
+      } else {
+        const response = handleChatbotQuery(arg);
+        typeLine(`🤖 AI Assistant: ${response}`);
+      }
+    }
+    else {
+      // Sensible typo fallback
+      const activeTheme = root.getAttribute('data-theme') || 'editorial';
+      if(activeTheme === 'terminal'){
+        typeLine(`404: Command '${cmd}' not found. Type 'help' to list available commands.`, "err");
+      } else if(activeTheme === 'retro'){
+        typeLine(`GLITCH! Unknown opcode '${cmd}'. Type 'help' for command list!`, "err");
+      } else if(activeTheme === 'origami'){
+        typeLine(`Fold unparsed: '${cmd}' not recognized. Type 'help' to unfold commands.`, "err");
+      } else if(activeTheme === 'canvas'){
+        typeLine(`Node unlinked: '${cmd}' invalid. Type 'help' to connect.`, "err");
+      } else {
+        typeLine(`Command '${cmd}' not found. Type 'help' to see available options.`, "err");
+      }
+    }
+  }
+
+  // Key Event Listener for Enter & Arrow History
+  inputEl.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter'){
+      const val = inputEl.value;
+      inputEl.value = '';
+      processCommand(val);
+    }
+    else if(e.key === 'ArrowUp'){
+      if(cmdHistory.length > 0){
+        if(historyIdx > 0) historyIdx--;
+        inputEl.value = cmdHistory[historyIdx] || '';
+      }
+    }
+    else if(e.key === 'ArrowDown'){
+      if(cmdHistory.length > 0){
+        if(historyIdx < cmdHistory.length - 1){
+          historyIdx++;
+          inputEl.value = cmdHistory[historyIdx] || '';
+        } else {
+          historyIdx = cmdHistory.length;
+          inputEl.value = '';
+        }
+      }
+    }
+  });
+
+  // Initial Welcome Messages on Load
+  printInstantLine("Welcome to Eswari's Dev Console v1.0", "sys");
+  printInstantLine("Type 'help' to view commands or 'ask <topic>' to query AI chatbot.", "sys");
+})();
+
+/* ===================== CONTACT FORM (mailto fallback, no backend) ===================== */
+const contactForm = document.getElementById('contactForm');
+if(contactForm){
+  contactForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = this.name.value, email=this.email.value, message=this.message.value;
+    const subject = encodeURIComponent('Portfolio contact from ' + name);
+    const body = encodeURIComponent(message + '\n\n— ' + name + ' (' + email + ')');
+    window.location.href = `mailto:eswari.d2011@gmail.com?subject=${subject}&body=${body}`;
+  });
+}
+</script>
+</body>
+</html>

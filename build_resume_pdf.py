@@ -1,0 +1,181 @@
+import sys
+
+def create_resume_pdf(filename="eswari_dangeti_resume.pdf"):
+    content = """%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+6 0 obj
+<< /Length 2600 >>
+stream
+BT
+/F1 22 Tf
+50 740 Td
+(ESWARI DANGETI) Tj
+ET
+BT
+/F2 10 Tf
+50 722 Td
+(Andhra Pradesh, India  |  eswari.d2011@gmail.com) Tj
+0 -14 Td
+(LinkedIn: linkedin.com/in/eswari-dangeti  |  GitHub: github.com/Eswaridangeti) Tj
+ET
+
+BT
+/F1 12 Tf
+50 675 Td
+(PROFESSIONAL SUMMARY) Tj
+ET
+BT
+/F2 10 Tf
+50 660 Td
+(Second-year B.Tech Computer Science student at NIAT with a strong interest in Software Development,) Tj
+0 -13 Td
+(Artificial Intelligence, and Product Innovation. Passionate about building technology-driven solutions) Tj
+0 -13 Td
+(through web development, AI applications, and collaborative project work.) Tj
+ET
+
+BT
+/F1 12 Tf
+50 605 Td
+(EDUCATION) Tj
+ET
+BT
+/F1 10 Tf
+50 590 Td
+(Bachelor of Technology (B.Tech) - Computer Science Engineering) Tj
+/F2 10 Tf
+0 -13 Td
+(National Institute of Advanced Technology (NIAT)  |  Expected Graduation: 2029) Tj
+ET
+
+BT
+/F1 12 Tf
+50 545 Td
+(TECHNICAL SKILLS) Tj
+ET
+BT
+/F1 10 Tf
+50 530 Td
+(Programming Languages:) Tj
+/F2 10 Tf
+135 0 Td
+(Python, JavaScript, C++, SQL) Tj
+-135 -14 Td
+/F1 10 Tf
+(Web Technologies:) Tj
+/F2 10 Tf
+135 0 Td
+(HTML, CSS, React.js, Node.js, REST APIs) Tj
+-135 -14 Td
+/F1 10 Tf
+(Databases:) Tj
+/F2 10 Tf
+135 0 Td
+(SQLite, Firebase, Supabase) Tj
+-135 -14 Td
+/F1 10 Tf
+(AI & Tools:) Tj
+/F2 10 Tf
+135 0 Td
+(Generative AI, Prompt Engineering, OpenAI APIs, Google Gemini APIs, Git, GitHub, VS Code) Tj
+ET
+
+BT
+/F1 12 Tf
+50 445 Td
+(PROJECTS) Tj
+ET
+BT
+/F1 10 Tf
+50 430 Td
+(IdeaForge AI - AI-Powered Business Idea Viability Analyzer) Tj
+/F2 10 Tf
+0 -13 Td
+(- Evaluates business ideas using natural language input, feasibility scoring, and risk assessment.) Tj
+0 -13 Td
+(- Generates viability scores, structured summaries, and Shark Tank-style investor feedback simulations.) Tj
+
+0 -20 Td
+/F1 10 Tf
+(Breakpoint Library - Engineering Failure Knowledge Exchange Platform) Tj
+/F2 10 Tf
+0 -13 Td
+(- Centralized platform for documenting and sharing engineering project failures to learn from mistakes.) Tj
+0 -13 Td
+(- Encourages knowledge sharing, innovation, and collaborative problem-solving.) Tj
+
+0 -20 Td
+/F1 10 Tf
+(CampusFlow - Smart Campus Management Platform) Tj
+/F2 10 Tf
+0 -13 Td
+(- Streamlines student activities, improves campus communication between students and faculty.) Tj
+0 -13 Td
+(- Facilitates efficient resource management with a focus on accessibility and user experience.) Tj
+ET
+
+BT
+/F1 12 Tf
+50 255 Td
+(LEADERSHIP & COMMUNITY) Tj
+ET
+BT
+/F1 10 Tf
+50 240 Td
+(Google Developer Community Member (2026 - Present)) Tj
+/F2 10 Tf
+0 -13 Td
+(- Active participant in technical workshops, developer events, hackathons, and community programs.) Tj
+0 -13 Td
+(- Presented technical projects in ideation and innovation challenges.) Tj
+ET
+
+BT
+/F1 12 Tf
+50 185 Td
+(LANGUAGES & INTERESTS) Tj
+ET
+BT
+/F2 10 Tf
+50 170 Td
+(Languages: English, Telugu, Hindi) Tj
+0 -13 Td
+(Interests: Artificial Intelligence, Software Development, Hackathons, Problem Solving, Innovation, Photography) Tj
+ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000246 00000 n 
+0000000319 00000 n 
+0000000388 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3040
+%%EOF
+"""
+    with open(filename, "wb") as f:
+        f.write(content.encode("latin-1"))
+    print(f"Resume PDF generated at {filename}")
+
+if __name__ == "__main__":
+    create_resume_pdf()
